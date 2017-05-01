@@ -60,33 +60,38 @@ public class FileDaoQueryTemplateImpl implements FileDaoQueryTemplate{
     }
 
     @Override
-    public <T> void update(String fileName, RowMapper<T> mapper, T model) {
-        try {
-            if(model instanceof Model) {
-                Model  castedModel = (Model)model;
-                int id = ((Model) model).getId();
-                List<T> models = findAll(fileName, mapper);
-                for (int i = 0; i < models.size(); i++) {
-                   Model currentModel = (Model)models.get(i);
-                   if(currentModel.getId() == id){
-                       models.set(i,model);
-                       break;
-                   }
+    public <T> void update(String fileName,  T model) {
+        if(model instanceof Model){
+            int id = ((Model) model).getId();
+            List<String> models = new ArrayList<>();
+            try {
+                BufferedReader reader = new BufferedReader(new FileReader(fileName));
+                String currentModel = reader.readLine();
+                while(currentModel!=null){
+                    String currentModelAsArray[] = currentModel.split(" ");
+                    int modelId = Integer.parseInt(currentModelAsArray[0]);
+                    if(modelId == id){
+                        models.add(model.toString());
+                    }else{
+                        models.add(currentModel);
+                    }
+                    currentModel = reader.readLine();
+                    // переписываем наш файл
+                    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+                    for(int i = 0; i < models.size(); i++){
+                        writer.write(models.get(i));
+                        writer.newLine();
+                    }
+                    writer.close();
                 }
-                BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-                for(int i = 0; i < models.size(); i++){
-                    writer.write(models.get(i).toString());
-                    writer.newLine();
-                }
-                writer.close();
-            }else{
-                throw new IllegalArgumentException("Model is not implement Model interface");
+            } catch (FileNotFoundException e) {
+                System.err.println("File not found Exception!!!");
+            } catch (IOException e) {
+                System.err.println("IO Exception!!!");
             }
 
-        } catch (FileNotFoundException e) {
-            System.err.println("File not found ");
-        } catch (IOException e) {
-            System.err.println("IO Exception");
+        }else{
+            throw new IllegalArgumentException("This model is not implement Model interface!");
         }
     }
 

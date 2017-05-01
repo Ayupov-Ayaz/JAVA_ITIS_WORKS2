@@ -21,11 +21,14 @@ public class AppContext<T>{
         }
     }
     public <T> T getComponent(Class<T> componentClass){
-        if(componentClass.getName().equals("ru.itis.main.services.UsersService")){
             try{
+            if(componentClass.getName().equals("ru.itis.main.services.UsersService")){
                 return (T)getUsersService();
+            }else if(componentClass.getName().equals("ru.itis.main.dao.AutoDao")){
+                return (T)getAutoDao();
+            }
+
             }catch(ReflectiveOperationException e){throw new IllegalStateException(e);}
-        }
         return null;
     }
 
@@ -67,5 +70,14 @@ public class AppContext<T>{
         UsersService usersService =
                 usersServiceConstructor.newInstance(getUsersDao());
         return usersService;
+    }
+    private <T> AutoDao getAutoDao() throws ReflectiveOperationException{
+
+            String autoDaoClassName = properties.getProperty("auto.dao.class");
+            String daoFileName = properties.getProperty("autos.file");
+            Class<AutoDao> autoDaoClass = (Class<AutoDao>)Class.forName(autoDaoClassName);
+            Constructor<AutoDao> constructor = autoDaoClass.getConstructor(String.class, FileDaoQueryTemplate.class);
+            AutoDao autoDao = constructor.newInstance(daoFileName,getFileDaoQueryTemplate());
+            return autoDao;
     }
 }

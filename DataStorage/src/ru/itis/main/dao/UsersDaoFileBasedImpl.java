@@ -56,12 +56,12 @@ public class UsersDaoFileBasedImpl implements UsersDao {
 
     @Override
     public void delete(int id) {
-        template.deleteByValue(fileName,0,userRowMapper,id);
+        template.deleteByValue(fileName,0,id);
     }
 
     @Override
     public void update(User model) {
-        template.update(fileName,userRowMapper,model);
+        template.update(fileName,model);
     }
 
     @Override

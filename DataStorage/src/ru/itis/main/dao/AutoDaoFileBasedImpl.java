@@ -38,7 +38,10 @@ public class AutoDaoFileBasedImpl implements AutoDao {
     @Override
     public Auto find(int id) {
         List<Auto> autos =  template.findByValue(fileName,autoRowMapper,0,id);
-        return autos.get(0);
+        if(autos.size()==0){
+            throw new AutoNotFoundException("Auto not found");
+        }else{
+        return autos.get(0);}
     }
 
     @Override
@@ -48,12 +51,12 @@ public class AutoDaoFileBasedImpl implements AutoDao {
 
     @Override
     public void delete(int id) {
-        template.deleteByValue(fileName,0,autoRowMapper,id);
+        template.deleteByValue(fileName,0,id);
     }
 
     @Override
     public void update(Auto auto) {
-       template.update(fileName,autoRowMapper,auto);
+       template.update(fileName,auto);
     }
 
     @Override
