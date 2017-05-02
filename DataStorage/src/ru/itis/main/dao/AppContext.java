@@ -26,6 +26,8 @@ public class AppContext<T>{
                 return (T)getUsersService();
             }else if(componentClass.getName().equals("ru.itis.main.dao.AutoDao")){
                 return (T)getAutoDao();
+            }else if(componentClass.getName().equals("ru.itis.main.dao.UsersDao")){
+                return (T)getUsersDao();
             }
 
             }catch(ReflectiveOperationException e){throw new IllegalStateException(e);}

@@ -9,20 +9,36 @@ public class Auto implements Model{
     private String color;
     private double carMileage;
     private boolean used;
+    private int idOwner;
 
-    public Auto(String model, String color, double carMileage,boolean used) {
-        this.model = model;
-        this.color = color;
-        this.carMileage = carMileage;
-        this.used = used;
-    }
-
-    public Auto(int id, String model, String color, double carMileage,boolean used) {
+    public Auto(int id, String model, String color, double carMileage, boolean used, int idOwner) {
         this.id = id;
         this.model = model;
         this.color = color;
         this.carMileage = carMileage;
         this.used = used;
+        this.idOwner = idOwner;
+    }
+
+    public Auto(int id, String model, String color, double carMileage, boolean used, User user) {
+        this.id = id;
+        this.model = model;
+        this.color = color;
+        this.carMileage = carMileage;
+        this.used = used;
+        this.idOwner = user.getId();
+    }
+
+    public Auto(String model, String color, double carMileage, boolean used, User user) {
+        this.model = model;
+        this.color = color;
+        this.carMileage = carMileage;
+        this.used = used;
+        this.idOwner = user.getId();
+    }
+
+    public int getIdOwner() {
+        return idOwner;
     }
 
     public boolean isUsed() {
@@ -51,7 +67,7 @@ public class Auto implements Model{
 
     @Override
     public String toString() {
-        return id+" "+model+" "+color+" "+carMileage+" "+used;
+        return id+" "+model+" "+color+" "+carMileage+" "+used+" "+idOwner;
     }
 
     @Override

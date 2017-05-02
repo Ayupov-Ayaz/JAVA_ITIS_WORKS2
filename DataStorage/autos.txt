@@ -1,20 +1,2 @@
-0 Mazda black 0.0 false
-18 BMV black 5977.2 true
-23 Mazda black 0.0 false
-24 BMV black 5977.2 true
-39 toyoto white 0.0 true
-40 toyoto white 0.0 true
-41 toyoto white 0.0 true
-42 toyoto white 0.0 true
-43 toyoto white 0.0 true
-44 toyoto white 0.0 true
-2 BMV red 592.2 true
-5 Toyoto Green 147.2 true
-6 BMV red 592.2 true
-2 BMV red 592.2 true
-4 BMV red 592.2 true
-5 Toyoto Green 147.2 true
-6 BMV red 592.2 true
-12 cherry red 847.2 true
-13 Toyoto Green 147.2 true
-14 Toyoto Green 147.2 true
+6 Toyoto Red 147.2 true 7
+7 Toyoto Red 147.2 true 7

@@ -1,15 +1,8 @@
 package ru.itis.main;
 
-import ru.itis.main.dao.AppContext;
-import ru.itis.main.dao.AutoDao;
-import ru.itis.main.dao.AutoDaoFileBasedImpl;
-import ru.itis.main.generators.IdGenerator;
-import ru.itis.main.generators.SimpleIdGenerator;
+import ru.itis.main.dao.*;
 import ru.itis.main.models.Auto;
 import ru.itis.main.models.User;
-import ru.itis.main.services.UsersService;
-import ru.itis.main.utils.FileDaoQueryTemplate;
-import ru.itis.main.utils.FileDaoQueryTemplateImpl;
 
 public class Main {
 
@@ -18,10 +11,11 @@ public class Main {
 
         AppContext<User> appContext = new AppContext<>();
         AutoDao autoDao = appContext.getComponent(AutoDao.class);
-        Auto auto = new Auto(5,"Toyoto","Green",147.2,true);
+        User user = new User(7,"Ayaz","qwertyu","Аяз",25);
+        UsersDao usersDao = appContext.getComponent(UsersDao.class);
+        Auto auto = new Auto("Toyoto","Red",147.2,true, user);
 
-        autoDao.delete(1);
-
+        System.out.println( autoDao.findAllAutoByOwner(user));
 
 
 

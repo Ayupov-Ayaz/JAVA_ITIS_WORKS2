@@ -4,6 +4,7 @@ import ru.itis.main.exception.AutoNotFoundException;
 import ru.itis.main.generators.SimpleIdGenerator;
 import ru.itis.main.mapper.RowMapper;
 import ru.itis.main.models.Auto;
+import ru.itis.main.models.User;
 import ru.itis.main.utils.FileDaoQueryTemplate;
 import ru.itis.main.utils.FileDaoQueryTemplateImpl;
 
@@ -30,7 +31,8 @@ public class AutoDaoFileBasedImpl implements AutoDao {
                                 autoDataAsArray[1],
                                 autoDataAsArray[2],
                                 Double.parseDouble(autoDataAsArray[3]),
-                                Boolean.valueOf(autoDataAsArray[4]));
+                                Boolean.valueOf(autoDataAsArray[4]),
+                                Integer.parseInt(autoDataAsArray[5]));
             return auto;
         }
     };
@@ -74,5 +76,15 @@ public class AutoDaoFileBasedImpl implements AutoDao {
             }
         }
        return usedAutos;
+    }
+
+    @Override
+    public List<Auto> findAllAutoByOwner(User user) {
+        int idUser = user.getId();
+        List<Auto> autos = template.findByValue(fileName,autoRowMapper,5,idUser);
+        if(autos.size()>0){
+            return autos;
+        }
+        throw new AutoNotFoundException("Auto not found");
     }
 }
