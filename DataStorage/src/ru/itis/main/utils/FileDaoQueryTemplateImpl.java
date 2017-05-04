@@ -3,14 +3,20 @@ package ru.itis.main.utils;
 import ru.itis.main.generators.IdGenerator;
 import ru.itis.main.mapper.RowMapper;
 import ru.itis.main.models.Model;
+import ru.itis.main.services.DbServiceImpl;
 
 import java.io.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class FileDaoQueryTemplateImpl implements FileDaoQueryTemplate{
     IdGenerator idGenerator;
+
 
     public FileDaoQueryTemplateImpl(IdGenerator idGenerator) {
         this.idGenerator = idGenerator;
@@ -39,60 +45,23 @@ public class FileDaoQueryTemplateImpl implements FileDaoQueryTemplate{
 
 
     @Override
-    public <T> int save(String fileName, T model) {
-            if(model instanceof Model) {
-                //Преобразуем нашу модель в интерфейс
-                Model castedModel = (Model)model;
-                castedModel.setId(idGenerator.generateId());
-                String modelDataAsString = castedModel.toString();
-                try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
-                writer.write(modelDataAsString);
-                writer.newLine();
-                writer.close();
-                return castedModel.getId();
-        } catch (IOException e) {
-            System.err.println("IO Exception");
+    public <T> int save( String query) {
+        try {
+            Connection connection = DbServiceImpl.connect();
+            Statement statement = connection.createStatement();
+             statement.execute(query);
+            connection.close();
+            return 1;
+            //TODO: как вытянуть id ?
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-            }
-        throw new IllegalArgumentException("Model is not implement Model interface");
-
+        return -1;
     }
 
     @Override
-    public <T> void update(String fileName,  T model) {
-        if(model instanceof Model){
-            int id = ((Model) model).getId();
-            List<String> models = new ArrayList<>();
-            try {
-                BufferedReader reader = new BufferedReader(new FileReader(fileName));
-                String currentModel = reader.readLine();
-                while(currentModel!=null){
-                    String currentModelAsArray[] = currentModel.split(" ");
-                    int modelId = Integer.parseInt(currentModelAsArray[0]);
-                    if(modelId == id){
-                        models.add(model.toString());
-                    }else{
-                        models.add(currentModel);
-                    }
-                    currentModel = reader.readLine();
-                    // переписываем наш файл
-                    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-                    for(int i = 0; i < models.size(); i++){
-                        writer.write(models.get(i));
-                        writer.newLine();
-                    }
-                    writer.close();
-                }
-            } catch (FileNotFoundException e) {
-                System.err.println("File not found Exception!!!");
-            } catch (IOException e) {
-                System.err.println("IO Exception!!!");
-            }
-
-        }else{
-            throw new IllegalArgumentException("This model is not implement Model interface!");
-        }
+    public  void update(String query) {
+        sqlQuery(query);
     }
 
     @Override
@@ -140,19 +109,19 @@ public class FileDaoQueryTemplateImpl implements FileDaoQueryTemplate{
             String current = reader.readLine();
             value = value.toString();
             int finded = 0; // счетчик, что бы больше одного не удалить
-            while(current!=null){
+            while (current != null) {
                 String currenAsArray[] = current.split(" ");
-                String needElement=currenAsArray[valueColumn];
-                if(needElement.equals(value) && finded == 0){
+                String needElement = currenAsArray[valueColumn];
+                if (needElement.equals(value) && finded == 0) {
                     finded++;
-                }else{
+                } else {
                     models.add(current);
                 }
                 current = reader.readLine();
             }
             // переписываем наш файл
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
-            for(int i = 0; i < models.size(); i++){
+            for (int i = 0; i < models.size(); i++) {
                 writer.write(models.get(i));
                 writer.newLine();
             }
@@ -162,7 +131,18 @@ public class FileDaoQueryTemplateImpl implements FileDaoQueryTemplate{
         } catch (IOException e) {
             System.err.println("IO Exception =(");
         }
+    }
 
 
+        @Override
+    public void sqlQuery(String query) {
+        try {
+            Connection connection = DbServiceImpl.connect();
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
