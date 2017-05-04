@@ -37,7 +37,12 @@ public class UsersDaoFileBasedImpl implements UsersDao {
 
     @Override
     public int save(User user) {
-      return template.save(fileName,user);
+      String query = "INSERT INTO group_user (login, password, name, age) VALUES ('"
+              +user.getLogin()+"','"
+              +user.getPassword()+"','"
+              +user.getName()+"',"
+              +user.getAge()+");";
+        return template.save(query);
     }
 
     // поиск объекта по id
@@ -56,12 +61,19 @@ public class UsersDaoFileBasedImpl implements UsersDao {
 
     @Override
     public void delete(int id) {
-        template.deleteByValue(fileName,0,id);
+        String query = "DELETE FROM group_user WHERE id="+id+";";
+        template.sqlQuery(query);
     }
 
     @Override
-    public void update(User model) {
-        template.update(fileName,model);
+    public void update(User user) {
+        String query = "UPDATE  group_user SET" +
+                " login ='"+user.getLogin()+"',"
+                +" password ='"+user.getPassword()+"',"
+                + " name ='"+user.getName()+"',"
+                + " age ="+user.getAge()
+                +"WHERE id ="+user.getId()+";";
+        template.update(query);
     }
 
     @Override

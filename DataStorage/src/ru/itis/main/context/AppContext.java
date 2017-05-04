@@ -1,5 +1,7 @@
-package ru.itis.main.dao;
+package ru.itis.main.context;
 
+import ru.itis.main.dao.AutoDao;
+import ru.itis.main.dao.UsersDao;
 import ru.itis.main.generators.IdGenerator;
 import ru.itis.main.services.UsersService;
 import ru.itis.main.utils.FileDaoQueryTemplate;
@@ -33,6 +35,8 @@ public class AppContext<T>{
             }catch(ReflectiveOperationException e){throw new IllegalStateException(e);}
         return null;
     }
+
+
 
     private IdGenerator getIdGenerator() throws ReflectiveOperationException {
         String idGeneratorClassName = properties.getProperty("id.generator.class");

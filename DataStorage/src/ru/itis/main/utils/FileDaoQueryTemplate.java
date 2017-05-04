@@ -26,8 +26,9 @@ public interface FileDaoQueryTemplate{
      * @return
      */
     <T>List<T> findByValue(String fileName, RowMapper<T> mapper, int valueColumn, Object value);
-    <T> int save(String fileName, T model);
-    <T> void update(String fileName,  T model);
-     void deleteByValue(String fileName, int valueColumn, Object value );
+    <T> int save(String query);
+    <T> void update(String query);
+     void deleteByValue(String fileName, int valueColumn, Object value);
+     void sqlQuery(String query);
 
 }
