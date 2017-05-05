@@ -1,5 +1,6 @@
-package ru.itis.main.dao;
+package ru.itis.main.dao.files;
 
+import ru.itis.main.dao.AutoDao;
 import ru.itis.main.exception.AutoNotFoundException;
 import ru.itis.main.generators.SimpleIdGenerator;
 import ru.itis.main.mapper.RowMapper;
@@ -27,12 +28,14 @@ public class AutoDaoFileBasedImpl implements AutoDao {
         @Override
         public Auto mapRow(String row) {
             String autoDataAsArray[] = row.split(" ");
-            Auto auto = new Auto(Integer.parseInt(autoDataAsArray[0]),
-                                autoDataAsArray[1],
-                                autoDataAsArray[2],
-                                Double.parseDouble(autoDataAsArray[3]),
-                                Boolean.valueOf(autoDataAsArray[4]),
-                                Integer.parseInt(autoDataAsArray[5]));
+            Auto auto = new Auto.Builder()
+                    .id(Integer.parseInt(autoDataAsArray[0]))
+                    .model(autoDataAsArray[1])
+                    .color(autoDataAsArray[2])
+                    .carMileage(Double.parseDouble(autoDataAsArray[3]))
+                    .used(Boolean.parseBoolean(autoDataAsArray[4]))
+                    .idOwner(Integer.parseInt(autoDataAsArray[5]))
+                    .build();
             return auto;
         }
     };
