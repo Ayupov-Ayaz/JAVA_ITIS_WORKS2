@@ -26,5 +26,5 @@ public class FilmsController {
         result.addObject("filmsModel",films);
         return result;
     }
-    
+
 }
