@@ -35,9 +35,9 @@ public class MainController {
             List<HttpMessageConverter<?>> converters = new ArrayList<>();
             converters.add(new MappingJackson2HttpMessageConverter());
             template.setMessageConverters(converters);
-            String count = ins_id.getText();
-            CountriesResponse response = template.getForObject("https://api.vk.com/method/database.getCountries?count="
-                            + count,
+            String country_id = ins_id.getText();
+            CountriesResponse response = template.getForObject("https://api.vk.com/method/database.getCities?country_id="
+                            + country_id,
                     CountriesResponse.class);
             text_list.getItems().clear();
             for (int i = 0; i < response.getResponse().size(); i++){
