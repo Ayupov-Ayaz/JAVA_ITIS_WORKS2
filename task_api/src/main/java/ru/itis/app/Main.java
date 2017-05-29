@@ -28,7 +28,7 @@ public class Main extends Application {
         // создаем родительское окно
         Parent root = loader.load();
         // создаем стейдж
-        primaryStage.setTitle("Hello");
+        primaryStage.setTitle("Api");
         // кладем сцену с окном
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/css/list-view-style.css").toExternalForm());
