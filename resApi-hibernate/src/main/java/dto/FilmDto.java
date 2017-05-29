@@ -1,28 +1,32 @@
-package ru.itis.models;
+package dto;
+
+import models.Actor;
+import models.Genre;
 
 import java.util.List;
 
 /**
- * 08.05.2017
- * Film @author Ayupov Ayaz (First Software Engineering Platform)
+ * 29.05.2017
+ * FilmDto @author Ayupov Ayaz (First Software Engineering Platform)
  *
  * @version v1.0 /
  */
-public class Film {
+public class FilmDto {
     private int id;
     private String name;
     private String releaseDate;
-    private List <Genre> genres;
+    private List<GenreDto> genres;
     private String country;
     private String producer;
     private int lasting;
     private String description;
-    private List <Actor> actors;
+    private List <ActorDto> actors;
     private String picture;
 
 
+    public FilmDto(){}
 
-    public Film(Builder builder){
+    public FilmDto(Builder builder){
         this.id = builder.id;
         this.name = builder.name;
         this.releaseDate = builder.releaseDate;
@@ -39,12 +43,12 @@ public class Film {
         private int id;
         private String name;
         private String releaseDate;
-        private List<Genre> genre;
+        private List<GenreDto> genre;
         private String country;
         private String producer;
         private int lasting;
         private String description;
-        private List<Actor> actors;
+        private List<ActorDto> actors;
         private String picture;
 
         public Builder id(int id){
@@ -59,7 +63,7 @@ public class Film {
             this.releaseDate = releaseDate;
             return this;
         }
-        public Builder genre(List<Genre> genre){
+        public Builder genre(List<GenreDto> genre){
             this.genre = genre;
             return this;
         }
@@ -79,7 +83,7 @@ public class Film {
             this.description = description;
             return this;
         }
-        public Builder actors(List<Actor> actors){
+        public Builder actors(List<ActorDto> actors){
             this.actors = actors;
             return this;
         }
@@ -87,84 +91,88 @@ public class Film {
             this.picture = picture;
             return this;
         }
-        public Film build(){
-            return new Film(this);
+        public FilmDto build(){
+            return new FilmDto(this);
         }
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getReleaseDate() {
         return releaseDate;
     }
 
-    public List<Genre> getGenres() {
+    public void setReleaseDate(String releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public List<GenreDto> getGenres() {
         return genres;
+    }
+
+    public void setGenres(List<GenreDto> genres) {
+        this.genres = genres;
     }
 
     public String getCountry() {
         return country;
     }
 
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public String getProducer() {
         return producer;
+    }
+
+    public void setProducer(String producer) {
+        this.producer = producer;
     }
 
     public int getLasting() {
         return lasting;
     }
 
+    public void setLasting(int lasting) {
+        this.lasting = lasting;
+    }
+
     public String getDescription() {
         return description;
     }
 
-    public List<Actor> getActors() {
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public List<ActorDto> getActorDto() {
         return actors;
+    }
+
+    public void setActorsDto(List<ActorDto> actors) {
+        this.actors = actors;
     }
 
     public String getPicture() {
         return picture;
     }
 
-    @Override
-    public String toString() {
-        return  id +
-                " " + name +
-                " " + releaseDate +
-                " " + genres +
-                " " + country +
-                " " + producer +
-                " " + lasting +
-                " " + description +
-                " " + actors +
-                " " + picture;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if(obj != null || obj instanceof Film){
-            if(obj == this) return true;
-            Film that = (Film) obj;
-            return this.id == that.id
-                    && this.name.equals(that.name)
-                    && this.genres.equals(that.genres)
-                    && this.actors.equals(that.actors)
-                    && this.country.equals(that.country)
-                    && this.description.equals(that.description)
-                    && this.lasting == that.lasting
-                    && this.producer.equals(that.producer)
-                    && this.picture.equals(that.picture)
-                    && this.releaseDate.equals(that.releaseDate);
-        }return false;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 }

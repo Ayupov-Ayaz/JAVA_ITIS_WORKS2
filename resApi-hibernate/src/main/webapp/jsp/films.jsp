@@ -27,7 +27,7 @@
             <th>режиссер</th>
             <th>изображение</th>
         </tr>
-        <c:forEach items="${requestScope.filmsModel}" var="film">
+        <c:forEach items="${requestScope.films}" var="film">
             <tr>
                 <td><c:out value="${film.id}"></c:out> </td>
                 <td><c:out value="${film.name}"></c:out> </td>
@@ -41,9 +41,9 @@
                 <td><c:out value="${film.description}"></c:out> </td>
                 <td><c:out value="${film.releaseDate}"></c:out> </td>
                 <td>
-                    <c:forEach items=" ${film.actors}" var = "actor">
-                        <c:out value="${actor.actorName}"></c:out>
-                    </c:forEach>
+                    <%--<c:forEach items=" ${film.actors}" var = "actor">--%>
+                        <%--<c:out value="${actor.actorName}"></c:out>--%>
+                    <%--</c:forEach>--%>
                 </td>
                 <td><c:out value="${film.producer}"></c:out> </td>
                 <td><c:out value="${film.picture}"></c:out> </td>
