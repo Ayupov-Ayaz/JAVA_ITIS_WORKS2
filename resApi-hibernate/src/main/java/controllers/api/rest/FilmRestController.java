@@ -1,5 +1,6 @@
 package controllers.api.rest;
 
+import converters.FilmConverter;
 import dto.FilmDto;
 import models.Film;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +23,12 @@ public class FilmRestController {
     @Autowired
     AfishaService afishaService;
 
-    @GetMapping(value ="films/{films-id}/BuGenre", params = "filter = genre")
-    public List<FilmDto> getGenresFilm(@PathVariable("films-id") int filmId,
-                                         @RequestParam("genres") String genres);
-    List<Film> films = afishaService.findByGenre();
+    @GetMapping(value ="films/{actorName}/inGenre", params = "filter = genre")
+    public List<FilmDto> getFilmsByActorInGenre(@PathVariable("actorName") String actorName,
+                                                @RequestParam("genre") String genre){
+        List<Film> films = afishaService.findByActorInGenre(actorName,genre);
+        List<FilmDto> filmsDto = FilmConverter.convertListFilm(films);
+        return filmsDto;
+    }
+
 }

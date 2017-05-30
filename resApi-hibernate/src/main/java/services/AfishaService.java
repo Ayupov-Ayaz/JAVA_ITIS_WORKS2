@@ -30,6 +30,6 @@ public interface AfishaService {
 
     List<Film> findAll();
 
-    List<Genre> getGenresByFilm(int idFilm)
+    List<Film> findByActorInGenre(String actorName, String genre);
 
 }

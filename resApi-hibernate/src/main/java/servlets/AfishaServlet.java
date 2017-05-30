@@ -35,7 +35,7 @@ public class AfishaServlet extends HttpServlet{
        GenericXmlApplicationContext context = new  GenericXmlApplicationContext();
        ConfigurableEnvironment environment = context.getEnvironment();
        environment.addActiveProfile("dev");
-       context.load("ru.itis\\spring\\context.xml");
+       context.load("ru.itis\\ru.itis.spring\\context.xml");
        context.refresh();
         afishaService = context.getBean(AfishaService.class);
     }
@@ -65,7 +65,7 @@ public class AfishaServlet extends HttpServlet{
             request.setAttribute("films",afishaService.findAll());
         }
 
-        request.getRequestDispatcher("/jsp/films.jsp").forward(request,response);
+        request.getRequestDispatcher("/jsp/filmsView.jsp").forward(request,response);
 
     }
 
@@ -110,7 +110,7 @@ public class AfishaServlet extends HttpServlet{
          afishaService.register(film);
 
         req.setAttribute("films", afishaService.findAll());
-        req.getRequestDispatcher("/jsp/films.jsp").forward(req,resp);
+        req.getRequestDispatcher("/jsp/filmsView.jsp").forward(req,resp);
 
     }
 }

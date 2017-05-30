@@ -102,7 +102,8 @@ public class FilmsNamedJdbcTemplateDaoImpl implements FilmsDao {
     // language=SQL
     private final String SQL_INSER_GENRE =
             "INSERT INTO genres ( id_film, genre) VALUES ( :id_film, :genre)";
-
+    // language=SQL
+    private final String SQL_SELECT_FILMS_BY_ACTOR_IN_GENRE = SQL_SELECT_ALL + "WHERE actor_name = :actor_name AND genre = :genre ";
 
     private ResultSetExtractor <List<Film>> resultSetExtractor = new ResultSetExtractor<List<Film>>() {
         @Override
@@ -208,6 +209,14 @@ public class FilmsNamedJdbcTemplateDaoImpl implements FilmsDao {
         return namedJdbcTemplate.query(SQL_SELECT_FILMS_BY_ACTORS,params,resultSetExtractor);
     }
 
+    @Override
+    public List<Film> findFilmsByActorsInGenre(String actorName, String genre) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("actor_name",actorName);
+        params.put("genre",genre);
+        return namedJdbcTemplate.query(SQL_SELECT_FILMS_BY_ACTOR_IN_GENRE,params,resultSetExtractor);
+    }
+
     public int save(Film film) {
         MapSqlParameterSource params = new MapSqlParameterSource()
                 .addValue("film_name", film.getName())
@@ -301,6 +310,7 @@ public class FilmsNamedJdbcTemplateDaoImpl implements FilmsDao {
         deleteGenreByIdFilm(id);
         deleteActorsByIdFilm(id);
     }
+
 
     public List<Film> findAll() {
         return namedJdbcTemplate.query(SQL_SELECT_ALL,resultSetExtractor);
