@@ -20,15 +20,16 @@
             <td>${film.producer}</td>
             <td>${film.lasting}</td>
 
-                <#--<#list film.actors as actor>-->
-            <#--<td>-->
+                <#list film.actors as actor>
+            <td>
                     <#--${actor.actorName}-->
-            <#--</td>-->
-                <#--</#list>-->
-            <#--<#list  .data_model["genres"] as genre>-->
+
+            </td>
+                </#list>
+            <#list  .data_model["genres"] as genre>
                 <#--<td>${film.genres}</td>-->
             <#--</#list>-->
-            <td>${film.description}</td>
+            <#--<td>${film.description}</td>-->
         </tr>
 
         </#list>

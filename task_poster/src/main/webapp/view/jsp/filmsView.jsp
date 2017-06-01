@@ -41,7 +41,7 @@
                 <td><c:out value="${film.description}"></c:out> </td>
                 <td><c:out value="${film.releaseDate}"></c:out> </td>
                 <td>
-                    <c:forEach items=" ${film.actors}" var = "actor">
+                    <c:forEach items="${film.actors}" var = "actor">
                         <c:out value="${actor.actorName}"></c:out>
                     </c:forEach>
                 </td>

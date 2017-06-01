@@ -10,13 +10,27 @@ package ru.itis.models;
 public class Actor {
     private int id;
     private String actorName;
+    private int idFilm;
+
     public Actor(Builder builder){
         this.id = builder.id;
         this.actorName = builder.actorName;
+        this.idFilm = builder.idFilm;
     }
+
+    public Actor() {
+    }
+
+
     public static class Builder{
         private int id;
         private String actorName;
+        private int idFilm;
+
+        public Builder idFilm(int idFilm){
+            this.idFilm = idFilm;
+            return this;
+        }
 
         public Builder id(int id){
             this.id = id;
@@ -29,6 +43,14 @@ public class Actor {
         public Actor build(){
             return new Actor(this);
         }
+    }
+
+    public int getIdFilm() {
+        return idFilm;
+    }
+
+    public void setIdFilm(int idFilm) {
+        this.idFilm = idFilm;
     }
 
     public int getId() {

@@ -24,7 +24,7 @@ public class Main {
         threadsCount = Integer.parseInt(reader.readLine());
         numbers = new int[numbersCount];
         for(int i = 0; i < numbers.length; i++){
-            numbers[i] = random.nextInt(10);
+            numbers[i] = random.nextInt(100);
         }
         int summ = 0;
         for(int i = 0; i < numbers.length; i++){
