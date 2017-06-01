@@ -1,9 +1,10 @@
-package ru.itis.dao;
+package dao;
 
+import models.Actor;
+import models.Film;
+
+import models.Genre;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-import ru.itis.models.Actor;
-import ru.itis.models.Film;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -11,7 +12,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import ru.itis.models.Genre;
+import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
 import java.sql.ResultSet;
@@ -29,25 +30,23 @@ import java.util.Map;
  */
 @Repository
 public class FilmsNamedJdbcTemplateDaoImpl implements FilmsDao {
-
+    @Autowired
     private NamedParameterJdbcTemplate namedJdbcTemplate;
-    private JdbcTemplate jdbcTemplate;
-
 
     public FilmsNamedJdbcTemplateDaoImpl(DataSource dataSource) {
         this.namedJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+
     }
 
     //language=SQL
     private final String SQL_SELECT_ALL =
             "SELECT films.id AS id, films.name AS film_name," +
-                    " films.releasedate AS releasedate, films.country AS country, " +
-                    "films.description AS description, films.lasting AS lasting," +
-                    "films.producer AS producer, films.picture AS picture, actors.id AS actor_id, actors.id_film AS actors_id_film," +
-                    "actors.actor_name AS actor_name, genres.genre AS genre, genres.id AS genre_id " +
-                    "FROM films JOIN actors ON films.id = actors.id_film \n " +
-                    "JOIN genres ON films.id = genres.id_film ";
+            " films.releasedate AS releasedate, films.country AS country, " +
+            "films.description AS description, films.lasting AS lasting," +
+            "films.producer AS producer, films.picture AS picture, actors.id AS actor_id, actors.id_film AS actors_id_film," +
+            "actors.actor_name AS actor_name, genres.genre AS genre, genres.id AS genre_id " +
+            "FROM films JOIN actors ON films.id = actors.id_film \n " +
+            "JOIN genres ON films.id = genres.id_film ";
 
     // language=SQL
     private final String SQL_SELECT_FILM_BY_ID =
@@ -76,13 +75,13 @@ public class FilmsNamedJdbcTemplateDaoImpl implements FilmsDao {
     // language=SQL
     private final String SQL_INSERT_FILM =
             "INSERT INTO films(name,releasedate,country,producer,lasting,description,picture) VALUES " +
-                    "(:film_name , :releasedate  , :country , :producer , :lasting , :description , :picture)";
+            "(:film_name , :releasedate  , :country , :producer , :lasting , :description , :picture)";
 
     // language=SQL
     private final String SQL_UPDATE_FILM_BY_ID =
             "UPDATE films SET name = :name , releasedate = :releasedate ," +
-                    " country = :country , producer = :producer , lasting = :lasting , description = :description, picture = :picture" +
-                    " WHERE id = :id ";
+            " country = :country , producer = :producer , lasting = :lasting , description = :description, picture = :picture" +
+            " WHERE id = :id ";
 
     // language=SQL
     private final String SQL_DELETE_FILM_BY_ID =
@@ -103,7 +102,8 @@ public class FilmsNamedJdbcTemplateDaoImpl implements FilmsDao {
     // language=SQL
     private final String SQL_INSER_GENRE =
             "INSERT INTO genres ( id_film, genre) VALUES ( :id_film, :genre)";
-
+    // language=SQL
+    private final String SQL_SELECT_FILMS_BY_ACTOR_IN_GENRE = SQL_SELECT_ALL + "WHERE actor_name = :actor_name AND genre = :genre ";
 
     private ResultSetExtractor <List<Film>> resultSetExtractor = new ResultSetExtractor<List<Film>>() {
         @Override
@@ -154,7 +154,7 @@ public class FilmsNamedJdbcTemplateDaoImpl implements FilmsDao {
                             .genre(genre)
                             .build();
                     films.get(filmsId).getGenres().add(newGenre);
-            }
+                }
                 //actors:
                 int actorId = resultSet.getInt("actor_id");
                 String actorName = resultSet.getString("actor_name");
@@ -207,6 +207,14 @@ public class FilmsNamedJdbcTemplateDaoImpl implements FilmsDao {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("actor_name",actorName);
         return namedJdbcTemplate.query(SQL_SELECT_FILMS_BY_ACTORS,params,resultSetExtractor);
+    }
+
+    @Override
+    public List<Film> findFilmsByActorsInGenre(String actorName, String genre) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("actor_name",actorName);
+        params.put("genre",genre);
+        return namedJdbcTemplate.query(SQL_SELECT_FILMS_BY_ACTOR_IN_GENRE,params,resultSetExtractor);
     }
 
     public int save(Film film) {
@@ -302,6 +310,7 @@ public class FilmsNamedJdbcTemplateDaoImpl implements FilmsDao {
         deleteGenreByIdFilm(id);
         deleteActorsByIdFilm(id);
     }
+
 
     public List<Film> findAll() {
         return namedJdbcTemplate.query(SQL_SELECT_ALL,resultSetExtractor);

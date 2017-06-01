@@ -1,4 +1,4 @@
-package ru.itis.models;
+package models;
 
 import java.util.List;
 
@@ -21,8 +21,6 @@ public class Film {
     private String picture;
 
 
-    public Film() {
-    }
 
     public Film(Builder builder){
         this.id = builder.id;
@@ -53,7 +51,6 @@ public class Film {
             this.id = id;
             return this;
         }
-
         public Builder name(String name){
             this.name = name;
             return this;
@@ -105,42 +102,6 @@ public class Film {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setReleaseDate(String releaseDate) {
-        this.releaseDate = releaseDate;
-    }
-
-    public void setGenres(List<Genre> genres) {
-        this.genres = genres;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public void setProducer(String producer) {
-        this.producer = producer;
-    }
-
-    public void setLasting(int lasting) {
-        this.lasting = lasting;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public void setActors(List<Actor> actors) {
-        this.actors = actors;
-    }
-
-    public void setPicture(String picture) {
-        this.picture = picture;
     }
 
     public String getReleaseDate() {

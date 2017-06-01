@@ -7,9 +7,9 @@
             <th>country</th>
             <th>producer</th>
             <th>lasting</th>
-            <th>actors</th>
-            <th>genres</th>
             <th>description</th>
+            <th>genres</th>
+            <th>actors</th>
         </tr>
         <#list .data_model["filmsModel"] as film>
         <tr>
@@ -19,15 +19,17 @@
             <td>${film.country}</td>
             <td>${film.producer}</td>
             <td>${film.lasting}</td>
-                <#--<#list .data_model["actors"] as actor>-->
-            <#--<td>-->
-                    <#--${actor}-->
-            <#--</td>-->
-                <#--</#list>-->
-            <#--<#list  .data_model["genres"] as genre>-->
-                <#--<td>${film.genre}</td>-->
+
+                <#list film.actors as actor>
+            <td>
+                    <#--${actor.actorName}-->
+
+            </td>
+                </#list>
+            <#list  .data_model["genres"] as genre>
+                <#--<td>${film.genres}</td>-->
             <#--</#list>-->
-            <td>${film.description}</td>
+            <#--<td>${film.description}</td>-->
         </tr>
 
         </#list>
