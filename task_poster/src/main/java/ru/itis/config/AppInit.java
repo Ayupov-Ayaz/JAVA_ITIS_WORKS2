@@ -1,10 +1,6 @@
 package ru.itis.config;
 
-
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-import ru.itis.filters.SimpleCORSFilter;
-
-import javax.servlet.Filter;
 
 public class AppInit extends AbstractAnnotationConfigDispatcherServletInitializer {
     @Override
@@ -20,10 +16,5 @@ public class AppInit extends AbstractAnnotationConfigDispatcherServletInitialize
     @Override
     protected String[] getServletMappings() {
         return new String[]{"/"};
-    }
-
-    @Override
-    protected Filter[] getServletFilters() {
-        return new Filter[]{new SimpleCORSFilter()};
     }
 }

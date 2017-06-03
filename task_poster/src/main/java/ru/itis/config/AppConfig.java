@@ -15,8 +15,12 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -25,7 +29,7 @@ import java.util.Properties;
 @EnableWebMvc
 @Configuration
 @ComponentScan("ru.itis")
-@PropertySource(value = "classpath:ru.itis\\db.properties")
+@PropertySource(value = "classpath:\\ru.itis\\spring\\db.properties")
 @Transactional
 public class AppConfig extends WebMvcConfigurerAdapter {
 
@@ -42,15 +46,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         return dataSource;
     }
 
-
-//    @Bean
-//    public SessionFactory sessionFactory() {
-//        LocalSessionFactoryBuilder builder = new LocalSessionFactoryBuilder(dataSource());
-//        builder.addResource("ru.itis\\hibernate\\User.hbm.xml");
-//        builder.addResource("ru.itis\\hibernate\\Auto.hbm.xml");
-//        builder.setProperty("hibernate.dialect","org.hibernate.dialect.PostgreSQL82Dialect");
-//        return builder.buildSessionFactory();
-//    }
 
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
@@ -81,10 +76,35 @@ public class AppConfig extends WebMvcConfigurerAdapter {
     @Bean
     Properties additionalProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update");
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.PostgreSQL82Dialect");
-        properties.setProperty("hibernate.enable_lazy_load_no_trans", "true");
+        properties.setProperty("ru.itis.hibernate.hbm2ddl.auto", "update");
+        properties.setProperty("ru.itis.hibernate.dialect", "org.ru.itis.hibernate.dialect.PostgreSQL82Dialect");
+        properties.setProperty("ru.itis.hibernate.enable_lazy_load_no_trans", "true");
         return properties;
     }
+    @Bean
+    public FreeMarkerViewResolver freeMarkerViewResolver(){
+        FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
+        resolver.setCache(true);
+        resolver.setPrefix("");
+        resolver.setSuffix(".ftl");
+        resolver.setContentType("text/html; charset=windows-1251");
+        return resolver;
+    }
+    @Bean
+    public FreeMarkerConfigurer freeMarkerConfigurer(){
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+        configurer.setTemplateLoaderPath("/WEB-INF/view/ftl/");
+        return configurer;
 
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
+
+    @Override
+    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+        configurer.enable();
+    }
 }

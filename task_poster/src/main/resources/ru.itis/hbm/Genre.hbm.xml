@@ -2,13 +2,14 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="ru.itis.models.Actor" catalog="public" table="actors">
+    <class name="ru.itis.models.Genre"  catalog="public" table="genres">
         <id name="id" column="id" type="java.lang.Integer">
             <generator class="identity"/>
         </id>
-        <property name="actorName" column="actor_name"/>
-        <many-to-one name="idFilm" class="ru.itis.models.Actor" fetch="join">
+
+        <many-to-one name="idFilm" class="ru.itis.models.Genre" fetch="join">
             <column name="id_film" not-null="true"/>
         </many-to-one>
-    </class>
+    </class>        
+        
 </hibernate-mapping>

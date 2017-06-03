@@ -19,12 +19,12 @@
             </key>
             <one-to-many class="ru.itis.models.Actor"/>
         </bag>
-        <bag name="genres">
-            <key>
-                <column name="id_film"/>
-            </key>
-            <one-to-many class="ru.itis.models.Genre"/>
-        </bag>
+        <!--<bag name="genres" fetch="select">-->
+            <!--<key>-->
+                <!--<column name="id_film"/>-->
+            <!--</key>-->
+            <!--<one-to-many class="ru.itis.models.Genre"/>-->
+        <!--</bag>-->
 
     </class>
 </hibernate-mapping>

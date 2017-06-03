@@ -14,7 +14,7 @@ public class AfishaServiceImpl implements AfishaService {
 
     @Autowired
     private FilmsDao filmsDao;
-    //TODO: может отвалиться
+
 
 
     @Override
