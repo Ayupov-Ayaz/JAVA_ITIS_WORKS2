@@ -20,11 +20,10 @@ public class FilmsController {
     AfishaService afishaService;
 
     @RequestMapping(value = "/films/all", method = RequestMethod.GET)
-    public ModelAndView getAll(){
-        ModelAndView result = new ModelAndView("films");
+    public String getAll(@ModelAttribute("model")ModelMap model){
         List<Film> films = afishaService.findAll();
-        result.addObject("filmsModel",films);
-        return result;
+        model.addAttribute("films",films);
+        return "films";
     }
 
 
