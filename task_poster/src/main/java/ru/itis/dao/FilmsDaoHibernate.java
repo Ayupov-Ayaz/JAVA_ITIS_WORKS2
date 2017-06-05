@@ -1,7 +1,8 @@
 package ru.itis.dao;
 
-import org.hibernate.Session;
-import ru.itis.hibernate.HibernateConnector;
+
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import ru.itis.models.Film;
 
 import javax.persistence.EntityManager;
@@ -15,8 +16,10 @@ import java.util.List;
  * @author Ayupov Ayaz (First Software Engineering Platform)
  * @version v1.0
  */
+@Component
 public class FilmsDaoHibernate implements FilmsDao {
 
+    private final static String JPA_FIND_ALL = "SELECT f FROM Film f join fetch f.actors join fetch f.genres";
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -28,10 +31,9 @@ public class FilmsDaoHibernate implements FilmsDao {
 
     @Override
     public Film find(int id) {
-
-        return (Film) entityManager.createQuery("SELECT f FROM Film f join fetch f.actors join fetch f.genres where id = :id", Film.class)
+        Film film = (Film) entityManager.createQuery(JPA_FIND_ALL +" where id = :id", Film.class)
                 .setParameter("id", id);
-
+        return film;
     }
 
     @Override
@@ -54,61 +56,31 @@ public class FilmsDaoHibernate implements FilmsDao {
 
     @Override
     public List<Film> findAll() {
-        return (List<Film>) entityManager.createQuery("SELECT f from Film f join fetch f.actors join fetch f.genres");
+        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL, Film.class);
     }
 
     @Override
     public List<Film> findByName(String name) {
-        this.session = HibernateConnector.getConnector().getSession();
-        session.beginTransaction();
-        List<Film> result = session.createQuery("from Film film where name = :name").setParameter("name", name).list();
-        session.getTransaction().commit();
-        session.close();
-        return result;
+       return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "WHERE name = :name",Film.class).setParameter("name",name);
     }
 
     @Override
     public List<Film> findByCountry(String country) {
-        this.session = HibernateConnector.getConnector().getSession();
-        session.beginTransaction();
-        List<Film> result = session.createQuery("from Film film where country = :country")
-                .setParameter("country", country)
-                .list();
-        session.getTransaction().commit();
-        session.close();
-        return result;
+        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "WHERE country = :country",Film.class).setParameter("country",country);
     }
 
     @Override
     public List<Film> findByProducer(String producer) {
-        this.session = HibernateConnector.getConnector().getSession();
-        session.beginTransaction();
-        List<Film> result = session.createQuery("from Film film where producer = :producer")
-                .setParameter("producer", producer).list();
-        session.getTransaction().commit();
-        session.close();
-        return result;
+        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where producer = :producer",Film.class).setParameter("producer",producer);
     }
 
     @Override
     public List<Film> findByGenre(String genre) {
-        this.session = HibernateConnector.getConnector().getSession();
-        session.beginTransaction();
-        List<Film> result = session.createQuery("from Film film where genre = :genre")
-                .setParameter("genre", genre).list();
-        session.getTransaction().commit();
-        session.close();
-        return result;
+       return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where genre = :genre",Film.class).setParameter("genre",genre);
     }
 
     @Override
     public List<Film> findByActors(String actorsName) {
-        this.session = HibernateConnector.getConnector().getSession();
-        session.beginTransaction();
-        List<Film> result = session.createQuery("from Film film where actor_name = :actor_name")
-                .setParameter("actor_name", actorsName).list();
-        session.getTransaction().commit();
-        session.close();
-        return result;
+        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where actor_name = :actor_name",Film.class).setParameter("actor_name", actorsName);
     }
 }
