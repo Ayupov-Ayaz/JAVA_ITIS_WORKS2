@@ -19,7 +19,7 @@ import java.util.List;
 @Component
 public class FilmsDaoHibernate implements FilmsDao {
 
-    private final static String JPA_FIND_ALL = "SELECT f FROM Film f join fetch f.actors join fetch f.genres";
+    private final static String JPA_FIND_ALL = "SELECT f FROM Film f ";
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -56,7 +56,7 @@ public class FilmsDaoHibernate implements FilmsDao {
 
     @Override
     public List<Film> findAll() {
-        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL, Film.class);
+        return entityManager.createQuery(JPA_FIND_ALL, Film.class).getResultList();
     }
 
     @Override

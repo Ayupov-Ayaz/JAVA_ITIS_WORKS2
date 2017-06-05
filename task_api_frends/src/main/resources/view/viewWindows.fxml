@@ -5,11 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="362.0"
-            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="ru.itis.controllers.MainController"
-      >
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="429.0" prefWidth="362.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ru.itis.controllers.MainController">
 
    <children>
       <ListView fx:id="listView" layoutX="11.0" layoutY="39.0" prefHeight="374.0" prefWidth="239.0" />
@@ -28,5 +24,7 @@
       </TextField>
 
       <TextField fx:id="textFieldForCount" alignment="CENTER" layoutX="258.0" layoutY="72.0" prefHeight="25.0" prefWidth="97.0" promptText="count " />
+
+
    </children>
 </AnchorPane>

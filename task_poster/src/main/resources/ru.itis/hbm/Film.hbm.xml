@@ -13,12 +13,12 @@
         <property name="lasting"/>
         <property name="description"/>
         <property name="picture"/>
-        <bag name="actors" fetch="select">
-            <key>
-                <column name="id_film"/>
-            </key>
-            <one-to-many class="ru.itis.models.Actor"/>
-        </bag>
+        <!--<bag name="actors" fetch="select">-->
+            <!--<key>-->
+                <!--<column name="id_film"/>-->
+            <!--</key>-->
+            <!--<one-to-many class="ru.itis.models.Actor"/>-->
+        <!--</bag>-->
         <!--<bag name="genres" fetch="select">-->
             <!--<key>-->
                 <!--<column name="id_film"/>-->

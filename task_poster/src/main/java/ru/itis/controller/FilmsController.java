@@ -3,9 +3,7 @@ package ru.itis.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import ru.itis.models.Film;
 import ru.itis.services.AfishaService;
 
@@ -25,18 +23,18 @@ public class FilmsController {
     private AfishaService afishaService;
 
 
-    @GetMapping("films/{film-id}")
-    public String getFilm(@ModelAttribute("model") ModelMap model, @PathVariable("film-id") int filmId){
+   @RequestMapping(value = "/films/{id}",method = RequestMethod.GET)
+    public String getFilm(@ModelAttribute("model") ModelMap model, @PathVariable("id") int filmId){
         List<Film> films = afishaService.findAll();
         Film film = films.get(filmId);
-        model.addAttribute("filmView",films);
-        return "filmView";
+        model.addAttribute("filmsModel",film);
+        return "film";
     }
-    @GetMapping("films/all")
+    @RequestMapping(value = "/films/all", method = RequestMethod.GET)
     public String getAll(@ModelAttribute("model") ModelMap model){
         List<Film> films = afishaService.findAll();
-        model.addAttribute("filmView",films);
-        return "filmView";
+        model.addAttribute("filmsModel",films);
+        return "filmsView";
     }
 
 }
