@@ -1,5 +1,7 @@
 package ru.itis.models;
 
+import javax.persistence.*;
+
 /**
  * 29.05.2017
  * Genre
@@ -7,10 +9,19 @@ package ru.itis.models;
  * @author Ayupov Ayaz (First Software Engineering Platform)
  * @version v1.0
  */
+@Entity
+@Table(name = "genres")
 public class Genre {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column
     private String genre;
-    private int idFilm;
+
+    @ManyToOne
+    @JoinColumn(name = "id_film")
+    private Film idFilm;
 
     public Genre() {
     }
@@ -18,12 +29,12 @@ public class Genre {
     public Genre(Builder builder){
         this.id = builder.id;
         this.genre = builder.genre;
-        this.idFilm =  builder.idFilm;
+        this.idFilm =  builder.film;
     }
     public static class Builder{
         private int id;
         private String genre;
-        private int idFilm;
+        private Film film;
 
         public Builder id(int id){
             this.id = id;
@@ -33,8 +44,8 @@ public class Genre {
             this.genre = genre;
             return this;
         }
-        public Builder idFilm(int idFilm){
-            this.idFilm = idFilm;
+        public Builder idFilm(Film film){
+            this.film = film;
             return this;
         }
         public Genre build(){
@@ -51,12 +62,12 @@ public class Genre {
         this.id = id;
     }
 
-    public int getIdFilm() {
-        return idFilm;
+    public Film getIdFilm() {
+        return this.idFilm;
     }
 
-    public void setIdFilm(int idFilm) {
-        this.idFilm = idFilm;
+    public void setIdFilm(Film film) {
+        this.idFilm = film;
     }
 
     public String getGenre() {

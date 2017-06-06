@@ -20,16 +20,16 @@
             <th>genres</th>
             <th>actors</th>
         </tr>
-    <#list model["filmsModel"] as film>
-    <tr>
-    <td>${film.id}</td>
+    <#--<#list model["filmsModel"] as film>-->
+    <#--<tr>-->
+    <#--<td>${film.id}</td>-->
     <#--<td>${film.name}</td>-->
     <#--<td>${film.releaseDate}</td>-->
     <#--<td>${film.country}</td>-->
     <#--<td>${film.producer}</td>-->
     <#--<td>${film.lasting}</td>-->
-    </tr>
-    </#list>
+    <#--</tr>-->
+    <#--</#list>-->
 
 
     </table>

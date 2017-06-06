@@ -1,5 +1,7 @@
 package ru.itis.models;
 
+import javax.persistence.*;
+
 /**
  * 29.05.2017
  * Actor
@@ -7,10 +9,19 @@ package ru.itis.models;
  * @author Ayupov Ayaz (First Software Engineering Platform)
  * @version v1.0
  */
+@Entity
+@Table(name = "actors")
 public class Actor {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "actor_name")
     private String actorName;
-    private int idFilm;
+
+    @ManyToOne
+    @JoinColumn(name = "id_film")
+    private Film idFilm;
 
     public Actor(Builder builder){
         this.id = builder.id;
@@ -25,9 +36,9 @@ public class Actor {
     public static class Builder{
         private int id;
         private String actorName;
-        private int idFilm;
+        private Film idFilm;
 
-        public Builder idFilm(int idFilm){
+        public Builder idFilm(Film idFilm){
             this.idFilm = idFilm;
             return this;
         }
@@ -45,11 +56,11 @@ public class Actor {
         }
     }
 
-    public int getIdFilm() {
+    public Film getIdFilm() {
         return idFilm;
     }
 
-    public void setIdFilm(int idFilm) {
+    public void setIdFilm(Film idFilm) {
         this.idFilm = idFilm;
     }
 

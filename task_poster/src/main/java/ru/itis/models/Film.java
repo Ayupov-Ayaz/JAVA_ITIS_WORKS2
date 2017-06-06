@@ -1,5 +1,6 @@
 package ru.itis.models;
 
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -9,15 +10,35 @@ import java.util.List;
  * @version v1.0 /
  */
 public class Film {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column
     private String name;
+
+    @Column(name = "release_date")
     private String releaseDate;
+
+    @OneToMany(mappedBy = "idFilm")
     private List <Genre> genres;
+
+    @Column
     private String country;
+
+    @Column
     private String producer;
+
+    @Column
     private int lasting;
+
+    @Column
     private String description;
+
+    @OneToMany(mappedBy = "idFilm")
     private List <Actor> actors;
+
+    @Column
     private String picture;
 
 
