@@ -30,24 +30,24 @@ import java.util.Properties;
 @Configuration
 @ComponentScan("ru.itis")
 @EnableWebMvc
-@PropertySource(value = "classpath:ru.itis\\db.properties")
+@PropertySource(value = "classpath:ru.itis\\spring\\db.properties")
 public class AppConfig extends WebMvcConfigurerAdapter {
 
-//    @Bean
-//    public FreeMarkerViewResolver freeMarkerViewResolver(){
-//        FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
-//        resolver.setCache(true);
-//        resolver.setPrefix("");
-//        resolver.setSuffix(".ftl");
-//        resolver.setContentType("text/html; charset=windows-1251");
-//        return resolver;
-//    }
-//    @Bean
-//    public FreeMarkerConfigurer freeMarkerConfigurer(){
-//        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
-//        configurer.setTemplateLoaderPath("/WEB-INF/view/ftl/");
-//        return configurer;
-//
-//    }
+    @Bean
+    public FreeMarkerViewResolver freeMarkerViewResolver(){
+        FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
+        resolver.setCache(true);
+        resolver.setPrefix("");
+        resolver.setSuffix(".ftl");
+        resolver.setContentType("text/html; charset=windows-1251");
+        return resolver;
+    }
+    @Bean
+    public FreeMarkerConfigurer freeMarkerConfigurer(){
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+        configurer.setTemplateLoaderPath("/WEB-INF/view/ftl/");
+        return configurer;
+
+    }
 
 }
