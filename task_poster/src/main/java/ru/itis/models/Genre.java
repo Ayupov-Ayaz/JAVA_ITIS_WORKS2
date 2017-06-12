@@ -1,6 +1,9 @@
 package ru.itis.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 29.05.2017
@@ -19,9 +22,9 @@ public class Genre {
     @Column
     private String genre;
 
-    @ManyToOne
-    @JoinColumn(name = "id_film")
-    private Film idFilm;
+    @ManyToMany(mappedBy = "genres")
+    private Set<Film> film = new HashSet<>();
+
 
     public Genre() {
     }
@@ -29,12 +32,12 @@ public class Genre {
     public Genre(Builder builder){
         this.id = builder.id;
         this.genre = builder.genre;
-        this.idFilm =  builder.film;
+        this.film = builder.film;
     }
     public static class Builder{
         private int id;
         private String genre;
-        private Film film;
+        private Set<Film> film = new HashSet<>();
 
         public Builder id(int id){
             this.id = id;
@@ -44,7 +47,7 @@ public class Genre {
             this.genre = genre;
             return this;
         }
-        public Builder idFilm(Film film){
+        public Builder film(Set<Film> film){
             this.film = film;
             return this;
         }
@@ -54,6 +57,7 @@ public class Genre {
 
     }
 
+
     public int getId() {
         return id;
     }
@@ -62,13 +66,6 @@ public class Genre {
         this.id = id;
     }
 
-    public Film getIdFilm() {
-        return this.idFilm;
-    }
-
-    public void setIdFilm(Film film) {
-        this.idFilm = film;
-    }
 
     public String getGenre() {
         return genre;
@@ -76,5 +73,36 @@ public class Genre {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Set<Film> getFilm() {
+        return film;
+    }
+
+    public void setFilm(Set<Film> film) {
+        this.film = film;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * id + (genre != null ? genre.hashCode() : 0);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj != null && obj instanceof Genre){
+            if(obj == this) return true;
+
+            Genre that = (Genre)obj;
+            return this.id == that.id
+                    && this.genre.equals(that.genre);
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public String toString() {
+        return genre +" ";
     }
 }

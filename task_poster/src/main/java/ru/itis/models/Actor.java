@@ -1,6 +1,9 @@
 package ru.itis.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 29.05.2017
@@ -19,14 +22,13 @@ public class Actor {
     @Column(name = "actor_name")
     private String actorName;
 
-    @ManyToOne
-    @JoinColumn(name = "id_film")
-    private Film idFilm;
+    @ManyToMany(mappedBy = "actors")
+    private Set<Film> films = new HashSet<>();
 
     public Actor(Builder builder){
         this.id = builder.id;
         this.actorName = builder.actorName;
-        this.idFilm = builder.idFilm;
+        this.films = builder.film;
     }
 
     public Actor() {
@@ -36,10 +38,10 @@ public class Actor {
     public static class Builder{
         private int id;
         private String actorName;
-        private Film idFilm;
+        private Set<Film> film = new HashSet<>();
 
-        public Builder idFilm(Film idFilm){
-            this.idFilm = idFilm;
+        public Builder film(Set<Film> film){
+            this.film = film;
             return this;
         }
 
@@ -47,21 +49,13 @@ public class Actor {
             this.id = id;
             return this;
         }
-        public Builder actor_name(String actorName){
+        public Builder actorName(String actorName){
             this.actorName = actorName;
             return this;
         }
         public Actor build(){
             return new Actor(this);
         }
-    }
-
-    public Film getIdFilm() {
-        return idFilm;
-    }
-
-    public void setIdFilm(Film idFilm) {
-        this.idFilm = idFilm;
     }
 
     public int getId() {
@@ -78,5 +72,35 @@ public class Actor {
 
     public void setActorName(String actorName) {
         this.actorName = actorName;
+    }
+
+    public Set<Film> getFilms() {
+        return films;
+    }
+
+    public void setFilms(Set<Film> films) {
+        this.films = films;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * id + (actorName != null ? actorName.hashCode() : 0);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj != null && obj instanceof Actor){
+            if(obj == this) return true;
+
+            Actor that = (Actor) obj;
+            return this.id == that.id
+                    && this.actorName.equals(that.actorName);
+        }else
+            return false;
+    }
+
+    @Override
+    public String toString() {
+        return  actorName + "\n";
     }
 }

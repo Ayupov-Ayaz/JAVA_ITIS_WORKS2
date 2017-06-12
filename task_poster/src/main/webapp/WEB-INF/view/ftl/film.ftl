@@ -3,7 +3,7 @@
 <@spring.bind "model" />
 <head>
     <meta  charset="UTF-8"/>
-    <title>Работает сука</title>
+    <title>${model.film.name}</title>
 </head>
 <body>
 <div id="container">
@@ -20,16 +20,31 @@
             <th>genres</th>
             <th>actors</th>
         </tr>
-    <#--<#list model["filmsModel"] as film>-->
-    <#--<tr>-->
-    <#--<td>${film.id}</td>-->
-    <#--<td>${film.name}</td>-->
-    <#--<td>${film.releaseDate}</td>-->
-    <#--<td>${film.country}</td>-->
-    <#--<td>${film.producer}</td>-->
-    <#--<td>${film.lasting}</td>-->
-    <#--</tr>-->
-    <#--</#list>-->
+        
+    <tr>
+        <td>${model.film.id}</td>
+        <td>${model.film.name}</td>
+        <td>${model.film.releaseDate}</td>
+        <td>${model.film.country}</td>
+        <td>${model.film.producer}</td>
+        <td>${model.film.lasting}</td>
+        <td>${model.film.description}</td>
+        <td>
+            <#list model.film.genres as genre>
+                ${genre}
+                <br>
+            </#list>
+        </td>
+        <td>
+            <#list model.film.actors as actor>
+                ${actor}
+                <br>
+            </#list>
+        </td>
+
+
+    </tr>
+
 
 
     </table>

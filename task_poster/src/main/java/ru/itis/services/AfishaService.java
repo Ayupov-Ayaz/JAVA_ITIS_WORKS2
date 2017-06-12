@@ -17,7 +17,7 @@ public interface AfishaService {
 
     Film findById(int id);
 
-    List<Film> findByName(String name);
+    Film findByName(String name);
 
     List<Film> findByCountry(String country);
 

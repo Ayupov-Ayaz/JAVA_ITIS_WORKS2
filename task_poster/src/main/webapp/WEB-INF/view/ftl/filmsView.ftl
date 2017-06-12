@@ -1,3 +1,5 @@
+<#ftl encoding='UTF-8'>
+<#import "spring.ftl" as spring />
 <div id="content">
     <table class="Film">
         <tr>
@@ -11,7 +13,7 @@
             <th>genres</th>
             <th>actors</th>
         </tr>
-        <#list .data_model["filmsModel"] as film>
+        <#list model["filmsModel"] as film>
         <tr>
             <td>${film.id}</td>
             <td>${film.name}</td>
@@ -19,17 +21,19 @@
             <td>${film.country}</td>
             <td>${film.producer}</td>
             <td>${film.lasting}</td>
-
-                <#--<#list film.actors as actor>-->
-            <#--<td>-->
-                    <#--&lt;#&ndash;${actor.actorName}&ndash;&gt;-->
-
-            <#--</td>-->
-                <#--</#list>-->
-            <#--<#list  .data_model["genres"] as genre>-->
-                <#--<td>${film.genres}</td>-->
-            <#--</#list>-->
-            <#--<td>${film.description}</td>-->
+            <td>${film.description}</td>
+            <td>
+                <#list film.genres as genre>
+                    ${genre}
+                    <br>
+                </#list>
+            </td>
+            <td>
+                <#list film.actors as actor>
+                    ${actor}
+                    <br>
+                </#list>
+            </td>
         </tr>
 
         </#list>

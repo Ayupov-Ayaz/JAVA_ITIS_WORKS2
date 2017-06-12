@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface FilmsDao extends BaseDao<Film> {
 
-    List<Film> findByName(String name);
+    Film findByName(String name);
     List<Film> findByCountry(String country);
     List<Film> findByProducer(String producer);
     List<Film> findByGenre(String genre);

@@ -17,10 +17,8 @@ import java.util.List;
  */
 public class Main {
     public static void main(String[] args) {
-        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        AfishaService afishaService = context.getBean(AfishaService.class);
-        List<Film> films = afishaService.findAll();
-        System.out.println(films);
+//        ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
+        System.out.println("run");
     }
 
 }

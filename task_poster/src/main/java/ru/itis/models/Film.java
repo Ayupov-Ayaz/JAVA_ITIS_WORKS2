@@ -1,7 +1,10 @@
 package ru.itis.models;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 08.05.2017
@@ -9,6 +12,8 @@ import java.util.List;
  *
  * @version v1.0 /
  */
+@Entity
+@Table(name = "films")
 public class Film {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,11 +22,9 @@ public class Film {
     @Column
     private String name;
 
-    @Column(name = "release_date")
+    @Column(name = "releasedate")
     private String releaseDate;
 
-    @OneToMany(mappedBy = "idFilm")
-    private List <Genre> genres;
 
     @Column
     private String country;
@@ -35,12 +38,24 @@ public class Film {
     @Column
     private String description;
 
-    @OneToMany(mappedBy = "idFilm")
-    private List <Actor> actors;
-
     @Column
     private String picture;
 
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "film_genre",
+            joinColumns =
+            @JoinColumn(name = "film_id", referencedColumnName = "id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "genre_id", referencedColumnName = "id"))
+    private Set<Genre> genres = new HashSet<Genre>();
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "film_actor",
+            joinColumns =
+            @JoinColumn(name = "film_id", referencedColumnName = "id"),
+            inverseJoinColumns =
+            @JoinColumn(name = "actor_id", referencedColumnName = "id"))
+    private Set<Actor> actors = new HashSet<Actor>();
 
     public Film() {
     }
@@ -62,12 +77,12 @@ public class Film {
         private int id;
         private String name;
         private String releaseDate;
-        private List<Genre> genre;
+        private Set<Genre> genre = new HashSet<Genre>();
         private String country;
         private String producer;
         private int lasting;
         private String description;
-        private List<Actor> actors;
+        private Set<Actor> actors = new HashSet<Actor>();
         private String picture;
 
         public Builder id(int id){
@@ -83,7 +98,7 @@ public class Film {
             this.releaseDate = releaseDate;
             return this;
         }
-        public Builder genre(List<Genre> genre){
+        public Builder genre(Set<Genre> genre){
             this.genre = genre;
             return this;
         }
@@ -103,7 +118,7 @@ public class Film {
             this.description = description;
             return this;
         }
-        public Builder actors(List<Actor> actors){
+        public Builder actors(Set<Actor> actors){
             this.actors = actors;
             return this;
         }
@@ -116,16 +131,17 @@ public class Film {
         }
     }
 
+
+    public Set<Actor> getActors() {
+        return actors;
+    }
+
+    public Set<Genre> getGenres() {
+        return genres;
+    }
+
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public void setName(String name) {
@@ -136,7 +152,7 @@ public class Film {
         this.releaseDate = releaseDate;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(Set<Genre> genres) {
         this.genres = genres;
     }
 
@@ -156,7 +172,7 @@ public class Film {
         this.description = description;
     }
 
-    public void setActors(List<Actor> actors) {
+    public void setActors(Set<Actor> actors) {
         this.actors = actors;
     }
 
@@ -164,12 +180,16 @@ public class Film {
         this.picture = picture;
     }
 
-    public String getReleaseDate() {
-        return releaseDate;
+    public int getId() {
+        return id;
     }
 
-    public List<Genre> getGenres() {
-        return genres;
+    public String getName() {
+        return name;
+    }
+
+    public String getReleaseDate() {
+        return releaseDate;
     }
 
     public String getCountry() {
@@ -188,9 +208,6 @@ public class Film {
         return description;
     }
 
-    public List<Actor> getActors() {
-        return actors;
-    }
 
     public String getPicture() {
         return picture;
@@ -223,8 +240,21 @@ public class Film {
                     && this.description.equals(that.description)
                     && this.lasting == that.lasting
                     && this.producer.equals(that.producer)
-                    && this.picture.equals(that.picture)
                     && this.releaseDate.equals(that.releaseDate);
         }return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (genres != null ? genres.hashCode() : 0);
+        result = 31 * result + (actors != null ? actors.hashCode() : 0);
+        result = 31 * result + (country != null ? country.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + lasting;
+        result = 31 * result + (producer != null ? producer.hashCode() : 0);
+        result = 31 * result + (releaseDate != null ? releaseDate.hashCode() : 0);
+        return result;
     }
 }

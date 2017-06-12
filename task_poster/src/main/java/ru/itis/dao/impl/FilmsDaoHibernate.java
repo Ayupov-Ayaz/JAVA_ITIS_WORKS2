@@ -1,11 +1,14 @@
-package ru.itis.dao;
+package ru.itis.dao.impl;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
+import ru.itis.dao.FilmsDao;
 import ru.itis.models.Film;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -16,10 +19,12 @@ import java.util.List;
  * @author Ayupov Ayaz (First Software Engineering Platform)
  * @version v1.0
  */
-@Component
+@Repository
 public class FilmsDaoHibernate implements FilmsDao {
 
     private final static String JPA_FIND_ALL = "SELECT f FROM Film f ";
+    //f JOIN f.genres g JOIN f.actors a
+
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -31,7 +36,7 @@ public class FilmsDaoHibernate implements FilmsDao {
 
     @Override
     public Film find(int id) {
-        Film film = entityManager.createQuery(JPA_FIND_ALL +" where id = :id", Film.class)
+        Film film = (Film) entityManager.createQuery(JPA_FIND_ALL +" where id = :id", Film.class)
                 .setParameter("id", id).getSingleResult();
         return film;
     }
@@ -62,27 +67,28 @@ public class FilmsDaoHibernate implements FilmsDao {
     }
 
     @Override
-    public List<Film> findByName(String name) {
-       return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "WHERE name = :name",Film.class).setParameter("name",name);
+    public Film findByName(String name) {
+       return  entityManager.createQuery(JPA_FIND_ALL + "WHERE name = :name",Film.class)
+               .setParameter("name",name).getSingleResult();
     }
 
     @Override
     public List<Film> findByCountry(String country) {
-        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "WHERE country = :country",Film.class).setParameter("country",country);
+        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "WHERE f.country = :country",Film.class).setParameter("country",country);
     }
 
     @Override
     public List<Film> findByProducer(String producer) {
-        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where producer = :producer",Film.class).setParameter("producer",producer);
+        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where f.producer = :producer",Film.class).setParameter("producer",producer);
     }
 
     @Override
     public List<Film> findByGenre(String genre) {
-       return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where genre = :genre",Film.class).setParameter("genre",genre);
+       return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where g.genre = :genre",Film.class).setParameter("genre",genre);
     }
 
     @Override
     public List<Film> findByActors(String actorsName) {
-        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where actor_name = :actor_name",Film.class).setParameter("actor_name", actorsName);
+        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where a.actor_name = :actor_name",Film.class).setParameter("actor_name", actorsName);
     }
 }

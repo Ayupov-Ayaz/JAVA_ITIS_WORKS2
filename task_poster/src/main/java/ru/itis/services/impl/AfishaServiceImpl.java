@@ -28,7 +28,7 @@ public class AfishaServiceImpl implements AfishaService {
     }
 
     @Override
-    public List<Film> findByName(String name) {
+    public Film findByName(String name) {
         return filmsDao.findByName(name);
     }
 
