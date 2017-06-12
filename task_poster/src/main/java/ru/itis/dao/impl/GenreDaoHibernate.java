@@ -3,11 +3,14 @@ package ru.itis.dao.impl;
 import org.springframework.stereotype.Repository;
 import ru.itis.dao.BaseDao;
 import ru.itis.dao.GenreDao;
+import ru.itis.models.Film;
 import ru.itis.models.Genre;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 12.06.2017
@@ -45,6 +48,12 @@ public class GenreDaoHibernate implements GenreDao {
     @Override
     public List<Genre> findAll() {
        return  entityManager.createQuery("SELECT g FROM Genre g",Genre.class).getResultList();
+    }
 
+    @Override
+    public Set<Film> findFilmByGenre(String genre) {
+        Genre findGenre = entityManager.createQuery("SELECT g FROM Genre g WHERE genre = :genre", Genre.class)
+                .setParameter("genre",genre).getSingleResult();
+        return findGenre.getFilm();
     }
 }

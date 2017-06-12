@@ -1,8 +1,10 @@
 package ru.itis.services;
 
+import ru.itis.models.Film;
 import ru.itis.models.Genre;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 12.06.2017
@@ -13,4 +15,5 @@ import java.util.List;
 public interface GenreService {
 
     List<Genre> getAll();
+    Set<Film> findFilmByGenre(String genre);
 }

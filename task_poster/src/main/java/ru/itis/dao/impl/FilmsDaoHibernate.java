@@ -74,21 +74,14 @@ public class FilmsDaoHibernate implements FilmsDao {
 
     @Override
     public List<Film> findByCountry(String country) {
-        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "WHERE f.country = :country",Film.class).setParameter("country",country);
+        return entityManager.createQuery(JPA_FIND_ALL + "WHERE country = :country",Film.class)
+                .setParameter("country",country).getResultList();
     }
 
     @Override
     public List<Film> findByProducer(String producer) {
-        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where f.producer = :producer",Film.class).setParameter("producer",producer);
+        return entityManager.createQuery(JPA_FIND_ALL + "where producer = :producer",Film.class)
+                .setParameter("producer",producer).getResultList();
     }
 
-    @Override
-    public List<Film> findByGenre(String genre) {
-       return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where g.genre = :genre",Film.class).setParameter("genre",genre);
-    }
-
-    @Override
-    public List<Film> findByActors(String actorsName) {
-        return (List<Film>) entityManager.createQuery(JPA_FIND_ALL + "where a.actor_name = :actor_name",Film.class).setParameter("actor_name", actorsName);
-    }
 }

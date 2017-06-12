@@ -43,16 +43,6 @@ public class AfishaServiceImpl implements AfishaService {
     }
 
     @Override
-    public List<Film> findByGenre(String genre) {
-        return filmsDao.findByGenre(genre);
-    }
-
-    @Override
-    public List<Film> findByActors(String actorsName) {
-        return filmsDao.findByActors(actorsName);
-    }
-
-    @Override
     public List<Film> findAll() {
         return filmsDao.findAll();
     }

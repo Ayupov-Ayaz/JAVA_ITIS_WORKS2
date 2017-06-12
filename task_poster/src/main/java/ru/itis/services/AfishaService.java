@@ -23,10 +23,6 @@ public interface AfishaService {
 
     List<Film> findByProducer(String producer);
 
-    List<Film> findByGenre(String genre);
-
-    List<Film> findByActors(String actorsName);
-
     List<Film> findAll();
 
 }

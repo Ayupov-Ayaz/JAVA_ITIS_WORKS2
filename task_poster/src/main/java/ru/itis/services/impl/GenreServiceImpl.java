@@ -3,10 +3,12 @@ package ru.itis.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.itis.dao.GenreDao;
+import ru.itis.models.Film;
 import ru.itis.models.Genre;
 import ru.itis.services.GenreService;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * 12.06.2017
@@ -22,5 +24,10 @@ public class GenreServiceImpl implements GenreService {
     @Override
     public List<Genre> getAll() {
         return genreDao.findAll();
+    }
+
+    @Override
+    public Set<Film> findFilmByGenre(String genre) {
+        return genreDao.findFilmByGenre(genre);
     }
 }

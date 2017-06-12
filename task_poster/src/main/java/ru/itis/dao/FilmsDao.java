@@ -15,7 +15,4 @@ public interface FilmsDao extends BaseDao<Film> {
     Film findByName(String name);
     List<Film> findByCountry(String country);
     List<Film> findByProducer(String producer);
-    List<Film> findByGenre(String genre);
-    List<Film> findByActors(String actorsName);
-
 }

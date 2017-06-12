@@ -1,41 +1,37 @@
 <#ftl encoding='UTF-8'>
 <#import "spring.ftl" as spring />
-<div id="content">
-    <table class="Film">
-        <tr>
-            <th>id</th>
-            <th>film name</th>
-            <th>release date</th>
-            <th>country</th>
-            <th>producer</th>
-            <th>lasting</th>
-            <th>description</th>
-            <th>genres</th>
-            <th>actors</th>
-        </tr>
-        <#list model["filmsModel"] as film>
-        <tr>
-            <td>${film.id}</td>
-            <td>${film.name}</td>
-            <td>${film.releaseDate}</td>
-            <td>${film.country}</td>
-            <td>${film.producer}</td>
-            <td>${film.lasting}</td>
-            <td>${film.description}</td>
-            <td>
-                <#list film.genres as genre>
-                    ${genre}
-                    <br>
-                </#list>
-            </td>
-            <td>
-                <#list film.actors as actor>
-                    ${actor}
-                    <br>
-                </#list>
-            </td>
-        </tr>
+<html>
+<head>
+    <title>Все фильмы</title>
+    <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/myStyle.css">
+</head>
+<body style="background: url('images/background.png ') ">
+<div id="container">
+   
+        <h2>Все доступные фильмы</h2>
 
-        </#list>
-    </table>
+    <div id="main">
+    <#list model["filmsModel"] as film>
+        <a href="http://localhost:8080/films/${film.id}" >
+            <h3 id="title_film">${film.name}</h3>
+        </a>
+        <img src="http://kak-narisovat.com/wp-content/uploads/2015/11/how-to-draw-pikachu-pokemon_1_000000015052_5.jpg" alt=" =( ">
+        <p>страна:<a href="http://localhost:8080/films/country/${film.country}">
+             ${film.country}
+        </a></p>
+
+        <p>режиссер:<a href="http://localhost:8080/films/producer/${film.producer}">
+             ${film.producer}
+        </a></p>
+            <p>продолжительность: ${film.lasting}</p>
+            <p>жанры: <#list film.genres as genre>
+                <a href="http://localhost:8080/films/genre/${genre}">${genre}</a>
+            </#list></p>
+        <hr>
+    </#list>
+    </div>
 </div>
+</body>
+
+</html>
