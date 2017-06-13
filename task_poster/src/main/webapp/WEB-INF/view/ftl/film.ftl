@@ -1,6 +1,7 @@
 <#ftl encoding='UTF-8'>
 <#import "spring.ftl" as spring />
 <@spring.bind "model" />
+<html>
 <head>
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="../../../css/myStyle.css" type="text/css">
@@ -11,8 +12,7 @@
 <div id="container">
     <div >
         <h3>${model.film.name}</h3>
-        <img src="https://htstatic.imgsmail.ru/pic_image/e6fd77f3ca05b444adec983ea9b6317a/1920/-/1220069/" alt=" =( "
-             style=" width: 300px">
+        <img id="img-film" src="${model.film.picture}" alt=" =( " style="height: 450px; width: 550px;">
         <p>дата релиза: ${model.film.releaseDate}</p>
         <p>страна:<a href="http://localhost:8080/films/country/${model.film.country}">
         ${model.film.country}
@@ -35,3 +35,4 @@
 
 
 </body>
+</html>

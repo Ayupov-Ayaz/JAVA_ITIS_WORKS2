@@ -13,21 +13,25 @@
 
     <div id="main">
     <#list model["filmsModel"] as film>
-        <a href="http://localhost:8080/films/${film.id}" >
-            <h3 id="title_film">${film.name}</h3>
-        </a>
-        <img src="http://kak-narisovat.com/wp-content/uploads/2015/11/how-to-draw-pikachu-pokemon_1_000000015052_5.jpg" alt=" =( ">
-        <p>страна:<a href="http://localhost:8080/films/country/${film.country}">
-             ${film.country}
-        </a></p>
+        <div class="col-lg-6">
+            <a href="http://localhost:8080/films/${film.id}" >
+                <h3 id="title_film">${film.name}</h3>
+            </a>
+            <img id="img-films" src="${film.picture}" alt=" =( "
+                 style="width: 350px;
+             height: 450px; ">
+            <br>
+            <p>страна:<a href="http://localhost:8080/films/country/${film.country}">${film.country}</a></p>
 
-        <p>режиссер:<a href="http://localhost:8080/films/producer/${film.producer}">
-             ${film.producer}
-        </a></p>
+            <p>режиссер:<a href="http://localhost:8080/films/producer/${film.producer}">
+            ${film.producer}
+            </a></p>
             <p>продолжительность: ${film.lasting}</p>
             <p>жанры: <#list film.genres as genre>
                 <a href="http://localhost:8080/films/genre/${genre}">${genre}</a>
             </#list></p>
+
+        </div>
         <hr>
     </#list>
     </div>

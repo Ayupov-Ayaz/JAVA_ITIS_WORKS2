@@ -3,7 +3,6 @@ h2{
 }
 #container{
     margin: 15px;
-    background-image: url("images/background.png");
     text-align: center;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-style: italic;
@@ -15,9 +14,13 @@ h2{
     align-content: center;
 }
 
-img{
-    height: 200px;
-    width: 300px;
+img #img-films{
+    height: auto;
+    width: auto;
+}
+img #img-film{
+    height: 400px;
+    width: 600px;
 }
 
 
