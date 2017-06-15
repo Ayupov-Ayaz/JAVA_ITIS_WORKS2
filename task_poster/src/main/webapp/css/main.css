@@ -1,26 +1,27 @@
-h2{
+h2, h3{
     text-align: center;
+    color: white;
+
 }
 #container{
-    margin: 15px;
     text-align: center;
     font-family: "Roboto", Helvetica, Arial, sans-serif;
     font-style: italic;
     text-align: center;
+    background-color: #204d74;
+    color: #080808;
+    margin-left: 150px;
+    padding: 50px 100px;
 }
 #description{
     width: 800px;
     text-align: center;
     align-content: center;
+
 }
 
-img #img-films{
-    height: auto;
-    width: auto;
-}
-img #img-film{
-    height: 400px;
-    width: 600px;
-}
+
+
+
 
 

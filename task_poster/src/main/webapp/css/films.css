@@ -1,0 +1,17 @@
+body{
+    background-image: url("http://elitefon.ru/images/201211/elitefon.ru_1801.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+p {
+    color: white;
+    text-align: center;
+}
+.img-films{
+    width: 350px;
+    height: 450px;
+    text-align: center;
+}
+
+

@@ -1,0 +1,14 @@
+INSERT INTO film_genre (film_id, genre_id) VALUES (2, 1);
+INSERT INTO film_genre (film_id, genre_id) VALUES (2, 2);
+INSERT INTO film_genre (film_id, genre_id) VALUES (3, 3);
+INSERT INTO film_genre (film_id, genre_id) VALUES (5, 3);
+INSERT INTO film_genre (film_id, genre_id) VALUES (6, 3);
+INSERT INTO film_genre (film_id, genre_id) VALUES (3, 3);
+INSERT INTO film_genre (film_id, genre_id) VALUES (1, 4);
+INSERT INTO film_genre (film_id, genre_id) VALUES (1, 5);
+INSERT INTO film_genre (film_id, genre_id) VALUES (5, 7);
+INSERT INTO film_genre (film_id, genre_id) VALUES (6, 7);
+INSERT INTO film_genre (film_id, genre_id) VALUES (4, 9);
+INSERT INTO film_genre (film_id, genre_id) VALUES (3, 9);
+INSERT INTO film_genre (film_id, genre_id) VALUES (5, 9);
+INSERT INTO film_genre (film_id, genre_id) VALUES (6, 11);

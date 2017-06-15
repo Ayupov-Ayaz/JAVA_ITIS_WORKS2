@@ -5,6 +5,6 @@ CREATE TABLE films (
   country VARCHAR(50),
   producer VARCHAR(50),
   lasting INTEGER,
-  description VARCHAR(255),
-  picture VARCHAR(100)
+  description VARCHAR(1000),
+  picture VARCHAR(300)
 );

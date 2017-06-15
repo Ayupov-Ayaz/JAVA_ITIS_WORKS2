@@ -3,16 +3,18 @@
 <@spring.bind "model" />
 <html>
 <head>
-    <meta charset="UTF-8"/>
-    <link rel="stylesheet" href="../../../css/myStyle.css" type="text/css">
     <link rel="stylesheet" href="../../../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/main.css" type="text/css">
+    <link rel="stylesheet" href="../../../css/film.css" type="text/css">
+    <meta charset="UTF-8"/>
     <title>${model.film.name}</title>
 </head>
 <body>
-<div id="container">
-    <div >
+<div id="film_container" class="col-lg-10">
+
         <h3>${model.film.name}</h3>
-        <img id="img-film" src="${model.film.picture}" alt=" =( " style="height: 450px; width: 550px;">
+            <img class="single_film" src="${model.film.picture}" alt=" picture is not found ">
+
         <p>дата релиза: ${model.film.releaseDate}</p>
         <p>страна:<a href="http://localhost:8080/films/country/${model.film.country}">
         ${model.film.country}
@@ -29,7 +31,7 @@
         <p>актеры: <#list model.film.actors as actor>
             <a href="http://localhost:8080/films/actor/${actor}">${actor}</a>
         </#list></p>
-    </div>
+
 
 </div>
 

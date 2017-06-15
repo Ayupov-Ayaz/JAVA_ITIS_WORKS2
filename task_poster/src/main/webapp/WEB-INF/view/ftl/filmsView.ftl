@@ -4,37 +4,37 @@
 <head>
     <title>Все фильмы</title>
     <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../../css/myStyle.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../../css/films.css">
 </head>
-<body style="background: url('images/background.png ') ">
-<div id="container">
+<body>
+<div class ="container">
    
         <h2>Все доступные фильмы</h2>
+        <hr>
 
-    <div id="main">
+
     <#list model["filmsModel"] as film>
-        <div class="col-lg-6">
+        <div class="main col-lg-6">
             <a href="http://localhost:8080/films/${film.id}" >
                 <h3 id="title_film">${film.name}</h3>
             </a>
-            <img id="img-films" src="${film.picture}" alt=" =( "
-                 style="width: 350px;
-             height: 450px; ">
+            <p><img class="img-films" src="${film.picture}" alt=" =( "></p>
             <br>
-            <p>страна:<a href="http://localhost:8080/films/country/${film.country}">${film.country}</a></p>
+            <div id="text_films">
+                <p>страна:<a href="http://localhost:8080/films/country/${film.country}">${film.country}</a></p>
 
-            <p>режиссер:<a href="http://localhost:8080/films/producer/${film.producer}">
-            ${film.producer}
-            </a></p>
-            <p>продолжительность: ${film.lasting}</p>
-            <p>жанры: <#list film.genres as genre>
-                <a href="http://localhost:8080/films/genre/${genre}">${genre}</a>
-            </#list></p>
-
+                <p>режиссер:<a href="http://localhost:8080/films/producer/${film.producer}">
+                ${film.producer}
+                </a></p>
+                <p>продолжительность: ${film.lasting}</p>
+                <p>жанры: <#list film.genres as genre>
+                    <a href="http://localhost:8080/films/genre/${genre}">${genre}</a>
+                </#list></p>
+            </div>
         </div>
-        <hr>
     </#list>
-    </div>
+
 </div>
 </body>
 
