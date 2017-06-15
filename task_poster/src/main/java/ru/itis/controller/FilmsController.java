@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import ru.itis.dao.ActorsDao;
 import ru.itis.models.Film;
 import ru.itis.models.Genre;
 import ru.itis.services.ActorService;
@@ -46,7 +45,7 @@ public class FilmsController {
         model.addAttribute("filmsModel",films);
         return "filmsView";
     }
-    @RequestMapping(value = "films/new", method = RequestMethod.GET)
+    @RequestMapping(value = "films/admin/new", method = RequestMethod.GET)
     public String newFilm(@ModelAttribute("model") ModelMap model){
         List<Genre> genres = genreService.getAll();
         model.addAttribute("genres",genres);
@@ -76,5 +75,8 @@ public class FilmsController {
         model.addAttribute("filmsModel",films);
         return "filmsView";
     }
+
+
+
 
 }

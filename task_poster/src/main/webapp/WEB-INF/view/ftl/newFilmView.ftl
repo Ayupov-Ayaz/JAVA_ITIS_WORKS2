@@ -1,28 +1,27 @@
+
 <#ftl encoding='UTF-8'>
 <#import "spring.ftl" as spring />
-
-<!DOCTYPE html>
 <head>
-   <title>Новый фильм</title>
-    <#--<link rel="stylesheet" type="text/css" href="/resources/css/film.css">-->
+   <title>Добавление нового фильма</title>
+    <meta charset="UTF-8">
 </head>
 
 <body>
     <div id="container">
-        <form action="newFilmView.ftl" method="post">
+        <form action="/films/admin/add" method="post">
             <input type="text" name="name" placeholder="| Название фильма" required><br>
             <input type="text" name="releaseDate" placeholder="| Дата релиза" required><br>
             <input type="text" name="lasting" placeholder="| Длительность" required><br>
             <input type="text" name="country" placeholder="| Страна" required><br>
-            <input type="text" name="producer" placeholder="| Режисер" required><br>
+            <input type="text" name="producer" placeholder="| Режисcер" required><br>
             <input type="text" name="description" placeholder="| Описание фильма" required><br>
             <input type="text" name="actors" placeholder="| Актеры" required><br>
-            <input type="submit" name="submit" value="Отправить" required><br>
             <div id="filmGenres">
                 <#list model["genres"] as genre>
                         <input id="${genre.id}" type="checkbox" name="${genre.genre}">
                         <label for="${genre.id}">${genre.genre}</label>
                 </#list>
+            <input type="submit" name="submit" value="Отправить" required><br>
             </div>
         </form>
 
