@@ -10,6 +10,7 @@ import ru.itis.services.ActorService;
 import ru.itis.services.AfishaService;
 import ru.itis.services.GenreService;
 
+import javax.enterprise.inject.Model;
 import java.util.List;
 import java.util.Set;
 
@@ -45,12 +46,7 @@ public class FilmsController {
         model.addAttribute("filmsModel",films);
         return "filmsView";
     }
-    @RequestMapping(value = "films/admin/new", method = RequestMethod.GET)
-    public String newFilm(@ModelAttribute("model") ModelMap model){
-        List<Genre> genres = genreService.getAll();
-        model.addAttribute("genres",genres);
-        return "newFilmView";
-    }
+
     @RequestMapping(value = "/films/producer/{producer}",method = RequestMethod.GET)
     public String getByProducer(@ModelAttribute("model") ModelMap model, @PathVariable("producer") String producer){
         List<Film> films = afishaService.findByProducer(producer);
@@ -75,7 +71,6 @@ public class FilmsController {
         model.addAttribute("filmsModel",films);
         return "filmsView";
     }
-
 
 
 

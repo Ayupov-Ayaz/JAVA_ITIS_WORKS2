@@ -18,7 +18,7 @@
             <input type="text" name="actors" placeholder="| Актеры" required><br>
             <div id="filmGenres">
                 <#list model["genres"] as genre>
-                        <input id="${genre.id}" type="checkbox" name="${genre.genre}">
+                        <input id="${genre.id}" type="checkbox" name="genres" value="${genre.genre}">
                         <label for="${genre.id}">${genre.genre}</label>
                 </#list>
             <input type="submit" name="submit" value="Отправить" required><br>
