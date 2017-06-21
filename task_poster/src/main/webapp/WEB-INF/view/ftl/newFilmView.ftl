@@ -1,5 +1,6 @@
 
-<#ftl encoding='UTF-8'>
+<#ftl encoding='utf-8'>
+
 <#import "spring.ftl" as spring />
 <head>
    <title>Добавление нового фильма</title>

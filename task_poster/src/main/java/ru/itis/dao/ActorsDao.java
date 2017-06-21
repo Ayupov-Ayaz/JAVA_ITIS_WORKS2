@@ -13,4 +13,8 @@ import java.util.Set;
  */
 public interface ActorsDao extends BaseDao<Actor> {
     Set<Film> findFilmByActor(String actor);
+
+    int getIdActorByName(String actorName);
+
+
 }

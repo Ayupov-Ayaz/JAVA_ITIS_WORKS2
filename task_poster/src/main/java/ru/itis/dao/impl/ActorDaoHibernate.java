@@ -1,5 +1,6 @@
 package ru.itis.dao.impl;
 
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 import ru.itis.dao.ActorsDao;
 import ru.itis.models.Actor;
@@ -29,12 +30,14 @@ public class ActorDaoHibernate implements ActorsDao {
 
     @Override
     public int save(Actor model) {
-        return 0;
+        entityManager.persist(model);
+        entityManager.flush();
+        return model.getId();
     }
 
     @Override
     public void update(Actor model) {
-
+        entityManager.merge(model);
     }
 
     @Override
@@ -53,4 +56,17 @@ public class ActorDaoHibernate implements ActorsDao {
                 .setParameter("actor",actorName).getSingleResult();
         return oneActor.getFilms();
     }
+
+    @Override
+    public int getIdActorByName(String actor) {
+        try {
+            Actor founded = entityManager.createQuery("SELECT a FROM Actor a WHERE actor_name = :actor", Actor.class)
+                    .setParameter("actor", actor).getSingleResult();
+            return founded.getId();
+        }catch (EmptyResultDataAccessException e){
+            return -1;
+        }
+    }
+
+
 }
