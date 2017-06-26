@@ -15,9 +15,11 @@ import java.util.List;
  */
 public interface UsersService {
 
-    UserDto registerUSer (UserDataForRegistrationDto user);
+    UserDto registerUser (UserDataForRegistrationDto user);
 
     String login(String password, String login);
 
     List<User> getUsers();
+
+    UserDto findByName(String name);
 }

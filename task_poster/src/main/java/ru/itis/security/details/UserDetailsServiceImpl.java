@@ -6,11 +6,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itis.dao.UsersDao;
+import ru.itis.models.Role;
 import ru.itis.models.User;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * 25.01.17
@@ -29,6 +33,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UsersDao usersDao;
 
+    @Override
+    @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String token) throws UsernameNotFoundException {
         if (usersDao.isExistToken(token)) {
             User user = usersDao.findByToken(token);

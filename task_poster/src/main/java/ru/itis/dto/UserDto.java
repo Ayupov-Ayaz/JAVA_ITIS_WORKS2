@@ -11,14 +11,24 @@ public class UserDto {
     private int id;
     private int age;
     private String name;
+    private String login;
 
     public UserDto() {
     }
 
-    public UserDto(int id, int age, String name) {
+    public UserDto(int id, int age, String name, String login) {
         this.id = id;
         this.age = age;
         this.name = name;
+        this.login = login;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public int getId() {
