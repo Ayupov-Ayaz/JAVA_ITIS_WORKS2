@@ -16,31 +16,31 @@
     <form id="contact" action="/films" method="post">
         <h3>Добавление нового фильма</h3>
         <fieldset>
-            <input name="name" placeholder="Название фильма" type="text" tabindex="1" required autofocus>
+            <input role="role" placeholder="Название фильма" type="text" tabindex="1" required autofocus>
         </fieldset>
         <fieldset>
-            <input name="genre" placeholder="Жанр" type="text" tabindex="2" required autofocus>
+            <input role="genre" placeholder="Жанр" type="text" tabindex="2" required autofocus>
         </fieldset>
         <fieldset>
-            <input name="country" placeholder="Страна" type="text" tabindex="3" required>
+            <input role="country" placeholder="Страна" type="text" tabindex="3" required>
         </fieldset>
         <fieldset>
-            <input name="producer" placeholder="Режисер" type="text" tabindex="4" required>
+            <input role="producer" placeholder="Режисер" type="text" tabindex="4" required>
         </fieldset>
         <fieldset>
-            <input name="description" placeholder="Описание фильма" type="text" tabindex="5" required>
+            <input role="description" placeholder="Описание фильма" type="text" tabindex="5" required>
         </fieldset>
         <fieldset>
-            <input name="releaseDate" placeholder="Дата релиза" type="text" tabindex="6" required>
+            <input role="releaseDate" placeholder="Дата релиза" type="text" tabindex="6" required>
         </fieldset>
         <fieldset>
-            <input name="actors" placeholder="Актеры" type="text" tabindex="7" required>
+            <input role="actors" placeholder="Актеры" type="text" tabindex="7" required>
         </fieldset>
         <fieldset>
-            <input name="lasting" placeholder="Продолжительность" type="text" tabindex="8">
+            <input role="lasting" placeholder="Продолжительность" type="text" tabindex="8">
         </fieldset>
         <fieldset>
-            <button name="submit" type="submit" >Сохранить</button>
+            <button role="submit" type="submit" >Сохранить</button>
         </fieldset>
     </form>
 </div>

@@ -39,10 +39,7 @@ public class PersistenceConfig {
     // менеджер транзакций
     @Bean
     public PlatformTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory);
-
-        return transactionManager;
+        return new JpaTransactionManager(entityManagerFactory().getObject());
     }
 
     // контейнер JPA

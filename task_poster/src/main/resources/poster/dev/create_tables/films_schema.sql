@@ -1,6 +1,6 @@
 CREATE TABLE films (
   id SERIAL PRIMARY KEY,
-  name VARCHAR(150),
+  role VARCHAR(150),
   releaseDate VARCHAR(30),
   country VARCHAR(50),
   producer VARCHAR(50),

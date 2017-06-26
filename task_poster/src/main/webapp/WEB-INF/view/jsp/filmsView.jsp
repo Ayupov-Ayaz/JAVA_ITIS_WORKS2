@@ -30,7 +30,7 @@
         <c:forEach items="${requestScope.filmsModel}" var="film">
             <tr>
                 <td><c:out value="${film.id}"></c:out> </td>
-                <td><c:out value="${film.name}"></c:out> </td>
+                <td><c:out value="${film.role}"></c:out> </td>
                 <td>
                     <c:forEach items="${film.genres}" var="genre">
                         <c:out value="${genre.genre}"></c:out>

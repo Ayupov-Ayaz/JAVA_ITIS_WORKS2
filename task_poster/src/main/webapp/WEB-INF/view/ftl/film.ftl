@@ -7,12 +7,12 @@
     <link rel="stylesheet" href="../../../css/main.css" type="text/css">
     <link rel="stylesheet" href="../../../css/film.css" type="text/css">
     <meta charset="UTF-8"/>
-    <title>${model.film.name}</title>
+    <title>${model.film.role}</title>
 </head>
 <body>
 <div id="film_container" class="col-lg-10">
 
-        <h3>${model.film.name}</h3>
+        <h3>${model.film.role}</h3>
             <img class="single_film" src="${model.film.picture}" alt=" picture is not found ">
 
         <p>дата релиза: ${model.film.releaseDate}</p>
