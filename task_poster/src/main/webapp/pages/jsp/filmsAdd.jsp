@@ -9,7 +9,7 @@
 <html>
 <head>
     <title>Добавление фильма</title>
-    <link rel="stylesheet" href="../../../css/table-style.css">
+    <link rel="stylesheet" href="../../css/table-style.css">
 </head>
 <body>
 <div class="container">

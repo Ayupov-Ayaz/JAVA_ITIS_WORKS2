@@ -13,6 +13,7 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,43 +21,56 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.UrlBasedViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
+import ru.itis.services.impl.UserDetailsServiceImpl;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("ru.itis")
 @EnableWebMvc
+@ComponentScan("ru.itis")
 @PropertySource(value = "classpath:ru.itis\\spring\\db.properties")
 public class AppConfig extends WebMvcConfigurerAdapter {
 
     @Bean
+    public FreeMarkerConfigurer freeMarkerConfigurer(){
+        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
+        configurer.setTemplateLoaderPath("/pages/");
+        return configurer;
+
+    }
+    @Bean
     public FreeMarkerViewResolver freeMarkerViewResolver(){
         FreeMarkerViewResolver resolver = new FreeMarkerViewResolver();
         resolver.setCache(true);
-        resolver.setPrefix("");
+        resolver.setPrefix("ftl/");
         resolver.setSuffix(".ftl");
         resolver.setContentType("text/html; charset=UTF-8");
         return resolver;
     }
     @Bean
-    public FreeMarkerConfigurer freeMarkerConfigurer(){
-        FreeMarkerConfigurer configurer = new FreeMarkerConfigurer();
-        configurer.setTemplateLoaderPath("/WEB-INF/view/ftl/");
-        return configurer;
+    public UrlBasedViewResolver setupViewResolver(){
+        UrlBasedViewResolver viewResolver = new UrlBasedViewResolver();
+        viewResolver.setPrefix("/pages/jsp/");
+        viewResolver.setSuffix(".jsp");
+        viewResolver.setViewClass(JstlView.class);
 
+        return viewResolver;
     }
     @Override
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+        registry.addResourceHandler("/pages/**").addResourceLocations("/pages/");
     }
 
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
+
 
 }

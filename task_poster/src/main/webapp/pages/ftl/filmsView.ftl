@@ -3,9 +3,9 @@
 <html>
 <head>
     <title>Все фильмы</title>
-    <link rel="stylesheet" type="text/css" href="../../../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../../../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../../../css/films.css">
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../../css/films.css">
 </head>
 <body>
 <div class ="container">

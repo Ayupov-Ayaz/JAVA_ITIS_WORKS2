@@ -3,9 +3,9 @@
 <@spring.bind "model" />
 <html>
 <head>
-    <link rel="stylesheet" href="../../../css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="../../../css/main.css" type="text/css">
-    <link rel="stylesheet" href="../../../css/film.css" type="text/css">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="../../css/main.css" type="text/css">
+    <link rel="stylesheet" href="../../css/film.css" type="text/css">
     <meta charset="UTF-8"/>
     <title>${model.film.name}</title>
 </head>

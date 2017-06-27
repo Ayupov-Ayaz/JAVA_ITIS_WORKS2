@@ -36,9 +36,9 @@ public class FilmsDaoHibernate implements FilmsDao {
 
     @Override
     public Film find(int id) {
-        Film film = (Film) entityManager.createQuery(JPA_FIND_ALL +" where id = :id", Film.class)
+       return entityManager.createQuery(JPA_FIND_ALL +" where id = :id", Film.class)
                 .setParameter("id", id).getSingleResult();
-        return film;
+
     }
 
     @Override
