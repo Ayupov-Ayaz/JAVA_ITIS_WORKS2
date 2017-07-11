@@ -2,10 +2,11 @@ package ru.itis.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -26,30 +27,31 @@ import javax.sql.DataSource;
 @Configuration
 @EnableJpaRepositories("ru.itis.dao")
 @EnableTransactionManagement
-//@PropertySource(value = "classpath:ru.itis\\spring\\db.properties")
 public class PersistenceConfig {
 
-    @Autowired
-    private Environment environment;
 
     @Bean
-    PlatformTransactionManager transactionManager(){
+    public PlatformTransactionManager transactionManager(){
+        System.err.println("Создание PlatformTransactionManager ");
         return new JpaTransactionManager(entityManagerFactory().getObject());
     }
 
     @Bean
-    LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+    public  LocalContainerEntityManagerFactoryBean entityManagerFactory(){
         LocalContainerEntityManagerFactoryBean entityManager = new LocalContainerEntityManagerFactoryBean();
 
         entityManager.setDataSource(dataSource());
         entityManager.setJpaVendorAdapter(hibernateJpaVendorAdapter());
         entityManager.setPackagesToScan("ru.itis.model");
+        System.err.println("Создание LocalContainerEntityManagerFactoryBean");
         return entityManager;
     }
 
     @Bean
-    DataSource dataSource(){
+    public DataSource dataSource(){
+        System.err.println("Создание DataSource");
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
         dataSource.setUrl("jdbc:postgresql://localhost:5432/itis_users");
         dataSource.setUsername("postgres");
         dataSource.setPassword("aspirin12");
@@ -58,7 +60,8 @@ public class PersistenceConfig {
     }
 
     @Bean
-    HibernateJpaVendorAdapter hibernateJpaVendorAdapter(){
+    public HibernateJpaVendorAdapter hibernateJpaVendorAdapter(){
+        System.err.println("Создание HibernateJpaVendorAdapter");
         HibernateJpaVendorAdapter hibernateAdapter = new HibernateJpaVendorAdapter();
         hibernateAdapter.setShowSql(true);
         hibernateAdapter.setGenerateDdl(true);
