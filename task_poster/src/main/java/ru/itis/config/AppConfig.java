@@ -39,7 +39,7 @@ public class AppConfig extends WebMvcConfigurerAdapter {
         resolver.setCache(true);
         resolver.setPrefix("");
         resolver.setSuffix(".ftl");
-        resolver.setContentType("text/html; charset=UTF-8");
+        resolver.setContentType("text/html; charset=windows-1251");
         return resolver;
     }
     @Bean

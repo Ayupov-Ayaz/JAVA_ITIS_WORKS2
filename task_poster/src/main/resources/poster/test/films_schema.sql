@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS films;
 CREATE TABLE films(
   id INTEGER AUTO_INCREMENT,
-  name VARCHAR(50),
+  role VARCHAR(50),
   releaseDate VARCHAR(20),
   genre VARCHAR(50),
   country VARCHAR(50),

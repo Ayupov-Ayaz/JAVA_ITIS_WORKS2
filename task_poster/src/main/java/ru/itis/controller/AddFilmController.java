@@ -1,5 +1,4 @@
 package ru.itis.controller;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -11,7 +10,6 @@ import ru.itis.models.Actor;
 import ru.itis.models.Genre;
 import ru.itis.services.ActorService;
 import ru.itis.services.GenreService;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +22,7 @@ import java.util.List;
  * @version v1.0
  */
 @Controller
-public class AddController{
+public class AddFilmController {
 
     @Autowired
     private GenreService genreService;
@@ -36,7 +34,7 @@ public class AddController{
     public String newFilm(@ModelAttribute("model") ModelMap model){
         List<Genre> genres = genreService.getAll();
         model.addAttribute("genres",genres);
-        return "newFilmView";
+        return "/WEB-INF/view/ftl/newFilmView.jsp";
     }
 
     @RequestMapping(value="/films/admin/add", method = RequestMethod.POST)

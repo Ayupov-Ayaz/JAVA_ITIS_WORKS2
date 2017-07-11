@@ -17,7 +17,7 @@
     <#list model["filmsModel"] as film>
         <div class="main col-lg-6">
             <a href="http://localhost:8080/films/${film.id}" >
-                <h3 id="title_film">${film.name}</h3>
+                <h3 id="title_film">${film.role}</h3>
             </a>
             <p><img class="img-films" src="${film.picture}" alt=" =( "></p>
             <br>
