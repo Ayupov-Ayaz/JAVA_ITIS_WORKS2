@@ -45,7 +45,7 @@ public class ChatsController {
     @GetMapping("chats/{chat-id}/messages")
     public ResponseEntity<List<MessageDto>> getMessages(
             @PathVariable("chat-id") int chatId, @RequestHeader("Auth-Token") String token) {
-        return new ResponseEntity<>(chatService.getMessages(token, chatId), HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(chatService.getMessages(chatId), HttpStatus.ACCEPTED);
     }
 
     @PostMapping("chats/{chat-id}/users")

@@ -68,6 +68,10 @@ function getAllMessagesByChatId(chatId){
             })
         }
     });
+}
 
-
+function redirect(){
+    if(!getCookie("Auth-Token")){
+        window.location.href = "http://localhost:8080/signin.html";
+    }
 }

@@ -38,15 +38,16 @@ public class ChatServiceImpl implements ChatService {
     @Autowired
     private SimpMessagingTemplate messagingTemplate;
 
+
     @Override
-    public List<MessageDto> getMessages(String token, int chatId) {
-        User user = usersDao.findByToken(token);
-        Chat chat = chatsDao.findOne(chatId);
-        List<Message> messages = messagesDao.findByAuthorAndChat(user, chat);
-        List<MessageDto> result = messages.
-                stream().map(message ->
-                new MessageDto(0, "Marsel", message.getText())).collect(Collectors.toList());
-        return result;
+    public List<MessageDto> getMessages( int chatId){
+
+            Chat chat = chatsDao.findOne(chatId);
+            List<Message> messages = messagesDao.findByChat(chat);
+            List<MessageDto> result = messages.
+                    stream().map(message ->
+                    new MessageDto(chatId, message.getAuthor().getName(), message.getText())).collect(Collectors.toList());
+            return result;
     }
 
     @Override

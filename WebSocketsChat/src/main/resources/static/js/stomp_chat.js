@@ -3,6 +3,7 @@ let chatId;
 window.onload = doConnect();
 
 function doConnect() {
+    redirect();
     chatId = getUrlVars()['id'];
     let socket = new SockJS('/chat');
     stompClient = Stomp.over(socket);

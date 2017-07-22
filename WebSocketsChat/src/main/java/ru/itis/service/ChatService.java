@@ -13,7 +13,7 @@ public interface ChatService {
      * @param chatId
      * @return список сообщений
      */
-    List<MessageDto> getMessages(String token, int chatId);
+    List<MessageDto> getMessages(int chatId);
 
     /**
      * Сохранить сообщение от автора с token-ом, и разослать всем в чате

@@ -54,15 +54,16 @@ public class TokenAuthFilter extends GenericFilterBean {
             return page.equals("/signin.html")
                     || page.equals("/registration.html")
                     || page.equals("/stomp_chat.html")
-                    || page.equals("/chat_list.html");
+                    || page.equals("/chat_list.html")
+                    || page.equals("/stomp_chat.html")
+                    || page.equals("/chat.html");
         } else return false;
     }
 
     private boolean isUnprotectedRestRequest(HttpServletRequest request) {
         return request.getRequestURI().startsWith("/users") && request.getMethod().equals("POST")
                 || request.getRequestURI().startsWith("/login") && request.getMethod().equals("POST")
-                || request.getRequestURI().startsWith("/authHandler") && request.getMethod().equals("GET")
-                || request.getRequestURI().startsWith("/chat") && request.getMethod().equals("GET");
+                || request.getRequestURI().startsWith("/authHandler") && request.getMethod().equals("GET");
     }
 
     private boolean isUnprotectedSourcesRequest(HttpServletRequest request) {

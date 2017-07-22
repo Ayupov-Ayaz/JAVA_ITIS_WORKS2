@@ -4,6 +4,8 @@ let chatId;
 window.onload = doConnect();
 
 function doConnect() {
+    redirect();
+
     chatId = getUrlVars()['id'];
     // создается объект websocket
     websocket = new WebSocket("ws://localhost:8080/authHandler");

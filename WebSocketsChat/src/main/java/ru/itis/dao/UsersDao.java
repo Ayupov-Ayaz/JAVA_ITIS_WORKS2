@@ -17,6 +17,7 @@ import java.util.List;
 public interface UsersDao extends CrudRepository<User, Integer> {
     User findByToken(String token);
     User findByLogin(String login);
+    User findUserById(int id);
 
     @Modifying
     @Query("update User user set user.token = ?2 where user.id = ?1")
